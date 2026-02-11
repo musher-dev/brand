@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json.schemastore.org/design-tokens",
+  "radius": {
+    "$type": "dimension",
+    "$description": "Border radius scale - Minimal cockpit aesthetic, not rounded/playful",
+    "none": {
+      "$value": "0",
+      "$description": "No rounding - sharp corners"
+    },
+    "control": {
+      "$value": "2px",
+      "$description": "Inputs, buttons - minimal rounding for precision feel"
+    },
+    "panel": {
+      "$value": "4px",
+      "$description": "Cards, panels - subtle rounding"
+    },
+    "card": {
+      "$value": "6px",
+      "$description": "Elevated components, modals"
+    },
+    "md": {
+      "$value": "6px",
+      "$description": "Medium rounding - alias for card radius, Tailwind md mapping"
+    },
+    "lg": {
+      "$value": "8px",
+      "$description": "Large cards, marketing elements"
+    },
+    "xl": {
+      "$value": "12px",
+      "$description": "Extra large - prominent marketing cards"
+    },
+    "full": {
+      "$value": "9999px",
+      "$description": "Fully rounded - pills, avatars"
+    }
+  }
+}

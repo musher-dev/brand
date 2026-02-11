@@ -1,0 +1,60 @@
+{
+  // === Dev Container Configuration ===
+  // Lightweight environment for Musher brand asset work
+
+  // --- General Settings ---
+  "name": "Musher Brand Development",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+
+  // --- Container Features ---
+  "features": {
+    // Common Utilities (Zsh, Oh My Zsh, etc.)
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "installZsh": true,
+      "configureZshAsDefaultShell": true,
+      "installOhMyZsh": true,
+      "upgradePackages": true
+    },
+    // Node.js 22 (Style Dictionary builds)
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "22"
+    },
+    // Git + LFS (binary asset tracking)
+    "ghcr.io/devcontainers/features/git:1": {},
+    // GitHub CLI
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    // Claude Code CLI
+    "ghcr.io/anthropics/devcontainer-features/claude-code:1": {},
+    // ShellCheck (shell script analysis)
+    "ghcr.io/lukewiwa/features/shellcheck:0": {
+      "version": "stable"
+    }
+  },
+
+  // --- Container Runtime ---
+  "runArgs": ["--init"],
+  "remoteUser": "vscode",
+  "updateRemoteUserUID": true,
+
+  // --- VS Code Customizations ---
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "esbenp.prettier-vscode",
+        "redhat.vscode-yaml",
+        "timonwong.shellcheck",
+        "eamodio.gitlens",
+        "bierner.markdown-mermaid"
+      ],
+      "settings": {
+        "editor.formatOnSave": true,
+        "files.trimTrailingWhitespace": true,
+        "files.insertFinalNewline": true,
+        "terminal.integrated.defaultProfile.linux": "zsh"
+      }
+    }
+  },
+
+  // --- Lifecycle Scripts ---
+  "postCreateCommand": "bash .devcontainer/scripts/post-create.sh"
+}

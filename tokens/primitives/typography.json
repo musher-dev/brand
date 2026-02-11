@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json.schemastore.org/design-tokens",
+  "font": {
+    "family": {
+      "$type": "fontFamily",
+      "sans": {
+        "$value": ["Inter", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
+        "$description": "Primary UI font - Engineering-grade sans-serif with excellent legibility"
+      },
+      "mono": {
+        "$value": ["JetBrains Mono", "Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", "monospace"],
+        "$description": "Data display font - Monospace with tabular numerals for code and data"
+      }
+    },
+    "size": {
+      "$type": "dimension",
+      "label": {
+        "$value": "11px",
+        "$description": "Labels, metadata, uppercase caps - smallest readable size"
+      },
+      "data": {
+        "$value": "13px",
+        "$description": "Data values, tables, dense information displays"
+      },
+      "body": {
+        "$value": "14px",
+        "$description": "Primary body text - default for most content"
+      },
+      "body-large": {
+        "$value": "16px",
+        "$description": "Large body text, introductions"
+      },
+      "heading-sm": {
+        "$value": "16px",
+        "$description": "Small headings, section labels"
+      },
+      "heading": {
+        "$value": "20px",
+        "$description": "Section headings"
+      },
+      "title": {
+        "$value": "24px",
+        "$description": "Page titles"
+      },
+      "display": {
+        "$value": "48px",
+        "$description": "Display text - marketing headlines"
+      },
+      "display-lg": {
+        "$value": "64px",
+        "$description": "Large display - hero headlines"
+      }
+    },
+    "weight": {
+      "$type": "fontWeight",
+      "normal": {
+        "$value": 400,
+        "$description": "Default text weight"
+      },
+      "medium": {
+        "$value": 500,
+        "$description": "Emphasized text, labels"
+      },
+      "semibold": {
+        "$value": 600,
+        "$description": "Headings, buttons"
+      },
+      "bold": {
+        "$value": 700,
+        "$description": "Strong emphasis"
+      }
+    },
+    "lineHeight": {
+      "$type": "number",
+      "label": {
+        "$value": 1.45,
+        "$description": "Tight line height for labels - 16px at 11px font"
+      },
+      "data": {
+        "$value": 1.54,
+        "$description": "Data display line height - 20px at 13px font"
+      },
+      "body": {
+        "$value": 1.57,
+        "$description": "Body text line height - 22px at 14px font"
+      },
+      "heading-sm": {
+        "$value": 1.5,
+        "$description": "Small heading line height - 24px at 16px font"
+      },
+      "heading": {
+        "$value": 1.4,
+        "$description": "Heading line height - 28px at 20px font"
+      },
+      "title": {
+        "$value": 1.33,
+        "$description": "Title line height - 32px at 24px font"
+      },
+      "display": {
+        "$value": 1.1,
+        "$description": "Display line height - tight for large text"
+      }
+    },
+    "letterSpacing": {
+      "$type": "dimension",
+      "label": {
+        "$value": "0.5px",
+        "$description": "Expanded tracking for uppercase labels"
+      },
+      "normal": {
+        "$value": "0",
+        "$description": "Default letter spacing"
+      },
+      "tight": {
+        "$value": "-0.01em",
+        "$description": "Tight tracking for titles"
+      },
+      "tighter": {
+        "$value": "-0.02em",
+        "$description": "Tighter tracking for display text"
+      }
+    }
+  }
+}

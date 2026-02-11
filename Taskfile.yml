@@ -1,0 +1,62 @@
+# Musher Brand Taskfile
+# Usage: task [task-name]
+# List tasks: task --list
+
+version: '3'
+
+includes:
+  tokens:
+    taskfile: tokens/Taskfile.yml
+    dir: tokens
+
+tasks:
+  # ===========================================================================
+  # Setup
+  # ===========================================================================
+
+  setup:
+    desc: Install all dependencies
+    cmds:
+      - task: tokens:setup
+
+  # ===========================================================================
+  # Build
+  # ===========================================================================
+
+  build:
+    desc: Build design tokens (CSS variables + Tailwind v4 theme)
+    cmds:
+      - task: tokens:build
+
+  # ===========================================================================
+  # Asset Pipeline
+  # ===========================================================================
+
+  optimize:
+    desc: Optimize SVGs and PNGs in src/
+    cmds:
+      - bash scripts/optimize.sh
+
+  export:
+    desc: Export optimized assets from src/ to dist/
+    cmds:
+      - bash scripts/export.sh
+
+  # ===========================================================================
+  # Validation
+  # ===========================================================================
+
+  validate:
+    desc: Validate naming conventions and expected files in dist/
+    cmds:
+      - bash scripts/validate.sh
+
+  # ===========================================================================
+  # Utilities
+  # ===========================================================================
+
+  clean:
+    desc: Clean all build output
+    cmds:
+      - task: tokens:clean
+      - echo "Clean complete!"

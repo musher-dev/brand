@@ -1,0 +1,175 @@
+{
+  "$schema": "https://json.schemastore.org/design-tokens",
+  "color": {
+    "$type": "color",
+    "brand": {
+      "$description": "Primary brand colors - Engineering Teal",
+      "teal": {
+        "100": {
+          "$value": "oklch(92% 0.04 195)",
+          "$description": "Lightest teal - subtle backgrounds"
+        },
+        "200": {
+          "$value": "oklch(85% 0.07 195)",
+          "$description": "Light teal"
+        },
+        "300": {
+          "$value": "oklch(78% 0.10 195)",
+          "$description": "Light-medium teal"
+        },
+        "400": {
+          "$value": "oklch(72% 0.10 195)",
+          "$description": "Dark mode primary - desaturated for contrast"
+        },
+        "500": {
+          "$value": "oklch(65% 0.14 195)",
+          "$description": "Primary brand color - Engineering Teal"
+        },
+        "600": {
+          "$value": "oklch(55% 0.14 195)",
+          "$description": "Dark teal - hover states on light"
+        },
+        "700": {
+          "$value": "oklch(45% 0.12 195)",
+          "$description": "Darker teal"
+        },
+        "800": {
+          "$value": "oklch(35% 0.10 195)",
+          "$description": "Very dark teal"
+        },
+        "900": {
+          "$value": "oklch(25% 0.08 195)",
+          "$description": "Darkest teal"
+        }
+      }
+    },
+    "neutral": {
+      "$description": "Grayscale palette for surfaces, text, and borders",
+      "0": {
+        "$value": "oklch(0% 0 0)",
+        "$description": "Pure black"
+      },
+      "5": {
+        "$value": "oklch(14% 0.005 285)",
+        "$description": "Surface 01 - Base background (dark mode default) - #161616"
+      },
+      "10": {
+        "$value": "oklch(20% 0.005 285)",
+        "$description": "Surface 02 - Elevated surfaces, panels, cards - #262626"
+      },
+      "15": {
+        "$value": "oklch(27% 0.005 285)",
+        "$description": "Surface 03 - Secondary elevation, inputs - #393939"
+      },
+      "20": {
+        "$value": "oklch(36% 0.005 285)",
+        "$description": "Surface 04 - Tertiary, subtle borders - #525252"
+      },
+      "30": {
+        "$value": "oklch(45% 0 0)",
+        "$description": "Border subtle"
+      },
+      "40": {
+        "$value": "oklch(55% 0 0)",
+        "$description": "Border strong, text disabled - #8D8D8D"
+      },
+      "50": {
+        "$value": "oklch(62% 0 0)",
+        "$description": "Text placeholder"
+      },
+      "60": {
+        "$value": "oklch(70% 0 0)",
+        "$description": "Text secondary"
+      },
+      "70": {
+        "$value": "oklch(78% 0 0)",
+        "$description": "Text secondary (light mode) - #C6C6C6"
+      },
+      "80": {
+        "$value": "oklch(85% 0 0)",
+        "$description": "Light gray"
+      },
+      "90": {
+        "$value": "oklch(92% 0 0)",
+        "$description": "Very light gray"
+      },
+      "95": {
+        "$value": "oklch(96% 0 0)",
+        "$description": "Text primary (dark mode) - #F4F4F4"
+      },
+      "100": {
+        "$value": "oklch(100% 0 0)",
+        "$description": "Pure white"
+      }
+    },
+    "signal": {
+      "$description": "Semantic signal colors - Safety Palette for status and feedback",
+      "error": {
+        "$value": "oklch(65% 0.22 25)",
+        "$description": "Block/Failure - Red - #FA4D56"
+      },
+      "error-muted": {
+        "$value": "oklch(45% 0.18 25)",
+        "$description": "Error background, danger buttons - #DA1E28"
+      },
+      "error-hover": {
+        "$value": "oklch(40% 0.18 25)",
+        "$description": "Danger hover state - #BA1B23"
+      },
+      "warning": {
+        "$value": "oklch(72% 0.18 55)",
+        "$description": "Low Confidence/Latency - Orange - #FF832B"
+      },
+      "success": {
+        "$value": "oklch(72% 0.17 145)",
+        "$description": "Deterministic Pass - Green - #42BE65"
+      },
+      "action": {
+        "$value": "oklch(59% 0.24 255)",
+        "$description": "Primary Interaction - Blue - #4589FF"
+      },
+      "action-hover": {
+        "$value": "oklch(52% 0.22 255)",
+        "$description": "Primary hover state - #3078E8"
+      },
+      "human": {
+        "$value": "oklch(62% 0.27 290)",
+        "$description": "Human-in-loop/Governance - Purple - #A56EFF"
+      },
+      "replay": {
+        "$value": "oklch(75% 0.15 90)",
+        "$description": "Time Travel Mode - Amber - #D2A106"
+      }
+    },
+    "categorical": {
+      "$description": "Data visualization categorical colors",
+      "purple": {
+        "$value": "oklch(62% 0.27 290)",
+        "$description": "Categorical 1 - Purple"
+      },
+      "teal": {
+        "$value": "oklch(60% 0.12 180)",
+        "$description": "Categorical 2 - Teal"
+      },
+      "magenta": {
+        "$value": "oklch(62% 0.22 350)",
+        "$description": "Categorical 3 - Magenta"
+      },
+      "cyan": {
+        "$value": "oklch(65% 0.15 230)",
+        "$description": "Categorical 4 - Cyan"
+      }
+    },
+    "warmth": {
+      "$description": "Warm accent colors for human-centric moments - onboarding, success, celebration",
+      "coral": {
+        "$value": "oklch(70% 0.15 25)",
+        "$description": "Warm coral - human warmth, celebration moments"
+      },
+      "coral-muted": {
+        "$value": "oklch(55% 0.12 25)",
+        "$description": "Muted coral - subtle warm backgrounds"
+      }
+    }
+  }
+}

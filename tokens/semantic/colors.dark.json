@@ -1,0 +1,184 @@
+{
+  "$schema": "https://json.schemastore.org/design-tokens",
+  "$description": "Dark mode semantic tokens - DEFAULT theme. Dark Mode First philosophy: this is the primary, light is the override.",
+  "surface": {
+    "$type": "color",
+    "$description": "Background surfaces - elevation through lightness in dark mode",
+    "base": {
+      "$value": "{color.neutral.5}",
+      "$description": "App background canvas - oklch(14% 0.005 285)"
+    },
+    "elevated": {
+      "$value": "{color.neutral.10}",
+      "$description": "Panels, cards, elevated surfaces - oklch(20% 0.005 285)"
+    },
+    "overlay": {
+      "$value": "{color.neutral.15}",
+      "$description": "Inputs, hover states, modals - oklch(27% 0.005 285)"
+    },
+    "muted": {
+      "$value": "{color.neutral.20}",
+      "$description": "Subtle backgrounds, disabled states - oklch(36% 0.005 285)"
+    }
+  },
+  "text": {
+    "$type": "color",
+    "$description": "Text colors - high contrast on dark backgrounds",
+    "primary": {
+      "$value": "{color.neutral.95}",
+      "$description": "Primary content text - oklch(96% 0 0)"
+    },
+    "secondary": {
+      "$value": "{color.neutral.70}",
+      "$description": "Supporting content - oklch(78% 0 0)"
+    },
+    "tertiary": {
+      "$value": "{color.neutral.50}",
+      "$description": "Muted text - oklch(62% 0 0)"
+    },
+    "placeholder": {
+      "$value": "{color.neutral.40}",
+      "$description": "Input placeholders - oklch(55% 0 0)"
+    },
+    "disabled": {
+      "$value": "{color.neutral.20}",
+      "$description": "Disabled text - oklch(36% 0.005 285)"
+    },
+    "inverse": {
+      "$value": "{color.neutral.5}",
+      "$description": "Text on light backgrounds - oklch(14% 0.005 285)"
+    }
+  },
+  "border": {
+    "$type": "color",
+    "$description": "Border colors for panels, inputs, and separators",
+    "subtle": {
+      "$value": "{color.neutral.20}",
+      "$description": "Subtle borders - oklch(36% 0.005 285)"
+    },
+    "default": {
+      "$value": "{color.neutral.30}",
+      "$description": "Default borders - oklch(45% 0 0)"
+    },
+    "strong": {
+      "$value": "{color.neutral.40}",
+      "$description": "Emphasized borders - oklch(55% 0 0)"
+    },
+    "focus": {
+      "$value": "{color.signal.action}",
+      "$description": "Focus ring color"
+    }
+  },
+  "brand": {
+    "$type": "color",
+    "$description": "Brand colors - Engineering Teal",
+    "primary": {
+      "$value": "{color.brand.teal.400}",
+      "$description": "Primary brand - desaturated for dark mode contrast"
+    },
+    "primary-hover": {
+      "$value": "{color.brand.teal.300}",
+      "$description": "Brand hover state"
+    },
+    "muted": {
+      "$value": "{color.brand.teal.800}",
+      "$description": "Subtle brand background"
+    }
+  },
+  "interactive": {
+    "$type": "color",
+    "$description": "Interactive element colors - buttons, links",
+    "primary": {
+      "$value": "{color.signal.action}",
+      "$description": "Primary action - blue"
+    },
+    "primary-hover": {
+      "$value": "{color.signal.action-hover}",
+      "$description": "Primary hover"
+    },
+    "secondary": {
+      "$value": "{color.neutral.15}",
+      "$description": "Secondary button background"
+    },
+    "secondary-hover": {
+      "$value": "{color.neutral.20}",
+      "$description": "Secondary hover"
+    },
+    "ghost": {
+      "$value": "transparent",
+      "$description": "Ghost button - no background"
+    },
+    "ghost-hover": {
+      "$value": "{color.neutral.10}",
+      "$description": "Ghost hover"
+    },
+    "danger": {
+      "$value": "{color.signal.error-muted}",
+      "$description": "Destructive action"
+    },
+    "danger-hover": {
+      "$value": "{color.signal.error-hover}",
+      "$description": "Destructive hover"
+    }
+  },
+  "signal": {
+    "$type": "color",
+    "$description": "Semantic signal colors - Safety Palette",
+    "error": {
+      "$value": "{color.signal.error}",
+      "$description": "Block/Failure - Red"
+    },
+    "warning": {
+      "$value": "{color.signal.warning}",
+      "$description": "Low Confidence/Latency - Orange"
+    },
+    "success": {
+      "$value": "{color.signal.success}",
+      "$description": "Deterministic Pass - Green"
+    },
+    "info": {
+      "$value": "{color.signal.action}",
+      "$description": "Information - Blue"
+    },
+    "human": {
+      "$value": "{color.signal.human}",
+      "$description": "Human-in-loop/Governance - Purple"
+    },
+    "replay": {
+      "$value": "{color.signal.replay}",
+      "$description": "Time Travel Mode - Amber"
+    }
+  },
+  "status": {
+    "$type": "color",
+    "$description": "Status indicators - deterministic vs probabilistic",
+    "deterministic": {
+      "$value": "{color.signal.success}",
+      "$description": "Deterministic data - solid green border"
+    },
+    "probabilistic": {
+      "$value": "{color.signal.warning}",
+      "$description": "Probabilistic data - dashed orange border"
+    },
+    "governance": {
+      "$value": "{color.signal.human}",
+      "$description": "Human governance required - purple"
+    },
+    "replay": {
+      "$value": "{color.signal.replay}",
+      "$description": "Time travel active - amber"
+    }
+  },
+  "warmth": {
+    "$type": "color",
+    "$description": "Warm accent colors for human-centric moments - onboarding, success, celebration",
+    "primary": {
+      "$value": "{color.warmth.coral}",
+      "$description": "Primary warmth - celebration, success states"
+    },
+    "muted": {
+      "$value": "{color.warmth.coral-muted}",
+      "$description": "Muted warmth - subtle warm backgrounds"
+    }
+  }
+}

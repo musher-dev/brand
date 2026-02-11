@@ -1,0 +1,56 @@
+# Brand Tokens Taskfile
+# Usage: task [task-name]
+# List tasks: task --list
+#
+# Build system for Musher design tokens
+
+version: '3'
+
+tasks:
+  # ===========================================================================
+  # Setup
+  # ===========================================================================
+
+  setup:
+    desc: Install dependencies
+    cmds:
+      - npm install
+    sources:
+      - package.json
+    generates:
+      - node_modules/.package-lock.json
+
+  # ===========================================================================
+  # Build
+  # ===========================================================================
+
+  build:
+    desc: Build design tokens (CSS variables + Tailwind v4 theme)
+    deps:
+      - setup
+    cmds:
+      - npm run build
+    sources:
+      - primitives/**/*.json
+      - semantic/**/*.json
+      - build.config.js
+      - transforms/**/*.js
+    generates:
+      - dist/css/variables.css
+      - dist/tailwind/theme.css
+
+  # ===========================================================================
+  # Utilities
+  # ===========================================================================
+
+  clean:
+    desc: Clean build output
+    cmds:
+      - npm run clean
+      - echo "Clean complete!"
+
+  clean:all:
+    desc: Clean everything including node_modules
+    cmds:
+      - rm -rf dist node_modules
+      - echo "Full clean! Run 'task setup' to reinstall."

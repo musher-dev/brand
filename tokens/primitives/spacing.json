@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json.schemastore.org/design-tokens",
+  "spacing": {
+    "$type": "dimension",
+    "$description": "4px/8px grid system for density-focused layouts. Use multiples of 4 for consistent spacing.",
+    "0": {
+      "$value": "0",
+      "$description": "No spacing"
+    },
+    "1": {
+      "$value": "4px",
+      "$description": "grid-1 - Minimal spacing, tight elements"
+    },
+    "1.5": {
+      "$value": "6px",
+      "$description": "Half-grid value for fine-grained control"
+    },
+    "2": {
+      "$value": "8px",
+      "$description": "grid-2 - Default small spacing, inline elements"
+    },
+    "3": {
+      "$value": "12px",
+      "$description": "grid-3 - Medium-small spacing"
+    },
+    "4": {
+      "$value": "16px",
+      "$description": "grid-4 - Default medium spacing, component padding"
+    },
+    "5": {
+      "$value": "20px",
+      "$description": "grid-5 - Medium-large spacing"
+    },
+    "6": {
+      "$value": "24px",
+      "$description": "grid-6 - Large spacing, section gaps"
+    },
+    "8": {
+      "$value": "32px",
+      "$description": "grid-8 - Extra large spacing"
+    },
+    "10": {
+      "$value": "40px",
+      "$description": "grid-10 - Section padding"
+    },
+    "12": {
+      "$value": "48px",
+      "$description": "grid-12 - Large section gaps"
+    },
+    "16": {
+      "$value": "64px",
+      "$description": "grid-16 - Page sections"
+    },
+    "20": {
+      "$value": "80px",
+      "$description": "grid-20 - Major page sections"
+    },
+    "24": {
+      "$value": "96px",
+      "$description": "grid-24 - Hero sections"
+    }
+  }
+}

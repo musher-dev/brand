@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json.schemastore.org/design-tokens",
+  "duration": {
+    "$type": "duration",
+    "$description": "Animation and transition duration scale",
+    "instant": {
+      "$value": "0ms",
+      "$description": "No animation"
+    },
+    "fast": {
+      "$value": "150ms",
+      "$description": "Quick interactions - hovers, button presses"
+    },
+    "normal": {
+      "$value": "250ms",
+      "$description": "Standard transitions - dropdowns, panels"
+    },
+    "slow": {
+      "$value": "400ms",
+      "$description": "Deliberate transitions - modals, page transitions"
+    },
+    "slower": {
+      "$value": "600ms",
+      "$description": "Slow animations - complex sequences"
+    }
+  },
+  "easing": {
+    "$type": "cubicBezier",
+    "$description": "Timing functions - Mechanical cockpit feel, not bouncy",
+    "linear": {
+      "$value": [0, 0, 1, 1],
+      "$description": "Linear - constant rate"
+    },
+    "cockpit": {
+      "$value": [0.2, 0, 0.38, 0.9],
+      "$description": "Default easing - precise, mechanical feel (IBM Carbon)"
+    },
+    "ease-in": {
+      "$value": [0.4, 0, 1, 1],
+      "$description": "Accelerate - elements leaving"
+    },
+    "ease-out": {
+      "$value": [0, 0, 0.2, 1],
+      "$description": "Decelerate - elements entering"
+    },
+    "ease-in-out": {
+      "$value": [0.4, 0, 0.2, 1],
+      "$description": "Smooth - elements moving"
+    }
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json.schemastore.org/design-tokens",
+  "shadow": {
+    "$type": "shadow",
+    "$description": "Box shadow scale - Subtle elevation for dark mode where shadows are less visible",
+    "none": {
+      "$value": {
+        "offsetX": "0",
+        "offsetY": "0",
+        "blur": "0",
+        "spread": "0",
+        "color": "transparent"
+      },
+      "$description": "No shadow"
+    },
+    "panel": {
+      "$value": {
+        "offsetX": "0",
+        "offsetY": "1px",
+        "blur": "3px",
+        "spread": "0",
+        "color": "rgba(0, 0, 0, 0.4)"
+      },
+      "$description": "Subtle panel elevation - cards, dropdowns"
+    },
+    "elevated": {
+      "$value": {
+        "offsetX": "0",
+        "offsetY": "4px",
+        "blur": "8px",
+        "spread": "0",
+        "color": "rgba(0, 0, 0, 0.4)"
+      },
+      "$description": "Medium elevation - popovers, tooltips"
+    },
+    "modal": {
+      "$value": {
+        "offsetX": "0",
+        "offsetY": "8px",
+        "blur": "24px",
+        "spread": "0",
+        "color": "rgba(0, 0, 0, 0.5)"
+      },
+      "$description": "High elevation - modals, dialogs"
+    },
+    "glow-action": {
+      "$value": {
+        "offsetX": "0",
+        "offsetY": "0",
+        "blur": "20px",
+        "spread": "0",
+        "color": "rgba(69, 137, 255, 0.3)"
+      },
+      "$description": "Action blue glow - marketing emphasis"
+    },
+    "glow-brand": {
+      "$value": {
+        "offsetX": "0",
+        "offsetY": "0",
+        "blur": "20px",
+        "spread": "0",
+        "color": "rgba(0, 163, 160, 0.3)"
+      },
+      "$description": "Brand teal glow - marketing emphasis"
+    },
+    "glow-human": {
+      "$value": {
+        "offsetX": "0",
+        "offsetY": "0",
+        "blur": "20px",
+        "spread": "0",
+        "color": "rgba(165, 110, 255, 0.3)"
+      },
+      "$description": "Human purple glow - governance emphasis"
+    }
+  }
+}

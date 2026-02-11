@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json.schemastore.org/design-tokens",
+  "$description": "Light mode semantic tokens - OVERRIDE theme. Applied via [data-theme='light'] or @media (prefers-color-scheme: light).",
+  "surface": {
+    "$type": "color",
+    "$description": "Background surfaces - inverted for light mode",
+    "base": {
+      "$value": "{color.neutral.100}",
+      "$description": "App background canvas - pure white"
+    },
+    "elevated": {
+      "$value": "{color.neutral.100}",
+      "$description": "Panels, cards - white with shadow for elevation"
+    },
+    "overlay": {
+      "$value": "{color.neutral.95}",
+      "$description": "Inputs, hover states - very light gray"
+    },
+    "muted": {
+      "$value": "{color.neutral.90}",
+      "$description": "Subtle backgrounds - light gray"
+    }
+  },
+  "text": {
+    "$type": "color",
+    "$description": "Text colors - dark text on light backgrounds",
+    "primary": {
+      "$value": "{color.neutral.5}",
+      "$description": "Primary content text - near black"
+    },
+    "secondary": {
+      "$value": "{color.neutral.30}",
+      "$description": "Supporting content - dark gray"
+    },
+    "tertiary": {
+      "$value": "{color.neutral.40}",
+      "$description": "Muted text - medium gray"
+    },
+    "placeholder": {
+      "$value": "{color.neutral.50}",
+      "$description": "Input placeholders - medium gray"
+    },
+    "disabled": {
+      "$value": "{color.neutral.70}",
+      "$description": "Disabled text - light gray"
+    },
+    "inverse": {
+      "$value": "{color.neutral.95}",
+      "$description": "Text on dark backgrounds - near white"
+    }
+  },
+  "border": {
+    "$type": "color",
+    "$description": "Border colors - visible on light backgrounds",
+    "subtle": {
+      "$value": "{color.neutral.80}",
+      "$description": "Subtle borders - light gray"
+    },
+    "default": {
+      "$value": "{color.neutral.70}",
+      "$description": "Default borders - medium-light gray"
+    },
+    "strong": {
+      "$value": "{color.neutral.60}",
+      "$description": "Emphasized borders - medium gray"
+    },
+    "focus": {
+      "$value": "{color.signal.action}",
+      "$description": "Focus ring color - same as dark mode"
+    }
+  },
+  "brand": {
+    "$type": "color",
+    "$description": "Brand colors - Engineering Teal (higher saturation for light)",
+    "primary": {
+      "$value": "{color.brand.teal.500}",
+      "$description": "Primary brand - full saturation for light mode"
+    },
+    "primary-hover": {
+      "$value": "{color.brand.teal.600}",
+      "$description": "Brand hover state - darker"
+    },
+    "muted": {
+      "$value": "{color.brand.teal.100}",
+      "$description": "Subtle brand background - very light teal"
+    }
+  },
+  "interactive": {
+    "$type": "color",
+    "$description": "Interactive element colors - adjusted for light backgrounds",
+    "primary": {
+      "$value": "{color.signal.action}",
+      "$description": "Primary action - blue (same)"
+    },
+    "primary-hover": {
+      "$value": "{color.signal.action-hover}",
+      "$description": "Primary hover"
+    },
+    "secondary": {
+      "$value": "{color.neutral.90}",
+      "$description": "Secondary button background - light gray"
+    },
+    "secondary-hover": {
+      "$value": "{color.neutral.80}",
+      "$description": "Secondary hover"
+    },
+    "ghost": {
+      "$value": "transparent",
+      "$description": "Ghost button - no background"
+    },
+    "ghost-hover": {
+      "$value": "{color.neutral.90}",
+      "$description": "Ghost hover - very light gray"
+    },
+    "danger": {
+      "$value": "{color.signal.error-muted}",
+      "$description": "Destructive action"
+    },
+    "danger-hover": {
+      "$value": "{color.signal.error-hover}",
+      "$description": "Destructive hover"
+    }
+  }
+}
