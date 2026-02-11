@@ -55,7 +55,7 @@ init_git_lfs() {
     }
   fi
 
-  git lfs install || {
+  git lfs install --force || {
     log "WARNING: Failed to initialize Git LFS"
     return 1
   }
