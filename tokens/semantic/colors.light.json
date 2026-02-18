@@ -120,5 +120,65 @@
       "$value": "{color.signal.error-hover}",
       "$description": "Destructive hover"
     }
+  },
+  "signal": {
+    "$type": "color",
+    "$description": "Semantic signal colors - Safety Palette",
+    "error": {
+      "$value": "{color.signal.error}",
+      "$description": "Block/Failure - Red"
+    },
+    "warning": {
+      "$value": "{color.signal.warning}",
+      "$description": "Low Confidence/Latency - Orange"
+    },
+    "success": {
+      "$value": "{color.signal.success}",
+      "$description": "Deterministic Pass - Green"
+    },
+    "info": {
+      "$value": "{color.signal.action}",
+      "$description": "Information - Blue"
+    },
+    "human": {
+      "$value": "{color.signal.human}",
+      "$description": "Human-in-loop/Governance - Purple"
+    },
+    "replay": {
+      "$value": "{color.signal.replay}",
+      "$description": "Time Travel Mode - Amber"
+    }
+  },
+  "status": {
+    "$type": "color",
+    "$description": "Status indicators - deterministic vs probabilistic",
+    "deterministic": {
+      "$value": "{color.signal.success}",
+      "$description": "Deterministic data - solid green border"
+    },
+    "probabilistic": {
+      "$value": "{color.signal.warning}",
+      "$description": "Probabilistic data - dashed orange border"
+    },
+    "governance": {
+      "$value": "{color.signal.human}",
+      "$description": "Human governance required - purple"
+    },
+    "replay": {
+      "$value": "{color.signal.replay}",
+      "$description": "Time travel active - amber"
+    }
+  },
+  "warmth": {
+    "$type": "color",
+    "$description": "Warm accent colors for human-centric moments - onboarding, success, celebration",
+    "primary": {
+      "$value": "{color.warmth.coral}",
+      "$description": "Primary warmth - celebration, success states"
+    },
+    "muted": {
+      "$value": "{color.warmth.coral-muted}",
+      "$description": "Muted warmth - subtle warm backgrounds"
+    }
   }
 }

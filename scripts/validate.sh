@@ -36,8 +36,8 @@ validate_naming() {
     local name
     name=$(basename "$file")
 
-    # Skip .gitkeep files
-    if [ "$name" = ".gitkeep" ]; then
+    # Skip .gitkeep and .md files
+    if [ "$name" = ".gitkeep" ] || [[ "$name" == *.md ]]; then
       skipped=$((skipped + 1))
       continue
     fi
@@ -72,13 +72,30 @@ validate_favicons() {
   fi
 
   log "Checking expected favicon files..."
-  local expected_files=("favicon.ico" "icon.svg" "apple-touch-icon.png")
 
-  for expected in "${expected_files[@]}"; do
-    if [ ! -f "$favicon_dir/$expected" ] && [ ! -f "$favicon_dir/musher-icon-favicon-${expected}" ]; then
+  # Check dist/icon/favicon/ for core favicon files
+  local expected_favicons=("musher-icon-favicon.ico" "musher-icon-favicon.svg")
+  for expected in "${expected_favicons[@]}"; do
+    if [ ! -f "$favicon_dir/$expected" ]; then
       err "Missing expected favicon: $expected"
     fi
   done
+
+  # Check dist/icon/ios/ for apple touch icon
+  local ios_dir="$DIST_DIR/icon/ios"
+  if [ -d "$ios_dir" ] && [ ! -f "$ios_dir/musher-icon-apple-touch-180.png" ]; then
+    err "Missing expected iOS icon: musher-icon-apple-touch-180.png"
+  fi
+
+  # Check dist/icon/android/ for android icons
+  local android_dir="$DIST_DIR/icon/android"
+  if [ -d "$android_dir" ]; then
+    for expected in "musher-icon-android-192.png" "musher-icon-android-512.png"; do
+      if [ ! -f "$android_dir/$expected" ]; then
+        err "Missing expected Android icon: $expected"
+      fi
+    done
+  fi
 }
 
 log "Validating dist/ in $ROOT_DIR..."

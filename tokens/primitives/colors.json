@@ -170,6 +170,36 @@
         "$value": "oklch(55% 0.12 25)",
         "$description": "Muted coral - subtle warm backgrounds"
       }
+    },
+    "surface-brand": {
+      "$description": "Named brand surface and foreground colors — single source of truth for asset and marketing use",
+      "obsidian": {
+        "$value": "oklch(16.7% 0.012 254)",
+        "$description": "Primary dark background — #0B0F14"
+      },
+      "cool-silver": {
+        "$value": "oklch(86.9% 0.020 253)",
+        "$description": "Primary foreground on dark — #CBD5E1"
+      },
+      "platinum": {
+        "$value": "oklch(87.2% 0.009 258)",
+        "$description": "Secondary foreground — #D1D5DB"
+      }
+    },
+    "accent": {
+      "$description": "Gradient and background accent colors",
+      "teal-deep": {
+        "$value": "oklch(27.7% 0.045 193)",
+        "$description": "Deep teal for gradients — #042F2E"
+      },
+      "indigo": {
+        "$value": "oklch(25.7% 0.086 281)",
+        "$description": "Indigo for gradients — #1E1B4B"
+      },
+      "navy": {
+        "$value": "oklch(21.8% 0.036 251)",
+        "$description": "Navy for gradients — #0D1B2A"
+      }
     }
   }
 }

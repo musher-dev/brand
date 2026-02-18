@@ -22,15 +22,23 @@ brand/
 │   ├── logo/          Mark, wordmark, lockup SVGs + design files
 │   ├── icon/          Favicon, PWA, iOS, Android sources
 │   ├── social/        Avatars, banners, OG templates
-│   └── background/    Hero, pattern, gradient sources
+│   │   ├── discord/       Server icon, banner, avatar
+│   │   └── github/        Organization social preview
+│   ├── background/    Hero, pattern, gradient sources
+│   └── fonts/         Inter, Inter Display, JetBrains Mono
 │
 ├── dist/          Optimized production exports (committed)
 │   ├── logo/          Optimized SVGs + rasterized PNGs
 │   ├── icon/          Full favicon/PWA/mobile icon sets
 │   ├── social/        Platform-specific social assets
+│   │   ├── discord/       Discord server icon, banner, avatar
+│   │   └── github/        GitHub organization social preview
 │   └── background/    Production backgrounds
 │
-├── docs/          Minimal brand documentation
+├── docs/          Brand documentation
+│   ├── Brand_Guidelines.md   Comprehensive brand reference
+│   └── social-links.json     Official profile links (Schema.org JSON-LD)
+│
 ├── scripts/       Automation (optimize, export, validate)
 └── .devcontainer/ Dev environment for brand asset work
 ```

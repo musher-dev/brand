@@ -6,6 +6,28 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [2.1.0] - 2026-02-18
+
+### Added
+
+- Discord social assets: server icon, fullmark icon, banners (540/1080), avatar (`src/social/discord/`, `dist/social/discord/`)
+- GitHub social assets: organization social preview at two resolutions (`src/social/github/`, `dist/social/github/`)
+- `docs/social-links.json` — Schema.org JSON-LD manifest with confirmed profile URLs (Discord, GitHub)
+- Named brand colors to token primitives: `color.surface-brand` (obsidian, cool-silver, platinum) and `color.accent` (teal-deep, indigo, navy)
+- `font.family.display` token for Inter Display (optical-size variant for large text and wordmark)
+
+### Fixed
+
+- Light mode semantic tokens (`colors.light.json`) now include `signal`, `status`, and `warmth` sections matching dark mode
+- `gradients.css` custom properties now reference token system color names in comments; renamed `--musher-teal` to `--musher-teal-deep` for accuracy
+
+### Changed
+
+- `docs/Brand_Guidelines.md` expanded from 37 lines to comprehensive reference covering all asset categories, accessibility, and token paths
+- `README.md` directory tree updated with `fonts/`, `discord/`, `github/` entries and links to brand documentation
+
+---
+
 ## [2.0.0] - 2026-02-11
 
 ### Changed

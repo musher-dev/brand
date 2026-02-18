@@ -1,0 +1,12 @@
+/* Musher gradient backgrounds — values from tokens/primitives/colors.json */
+:root {
+  --musher-obsidian: #0B0F14;       /* color.surface-brand.obsidian */
+  --musher-teal-deep: #042F2E;      /* color.accent.teal-deep */
+  --musher-indigo: #1E1B4B;         /* color.accent.indigo */
+  --musher-navy: #0D1B2A;           /* color.accent.navy */
+}
+
+/* Linear gradients */
+.bg-musher-obsidian-teal { background: linear-gradient(135deg, var(--musher-obsidian), var(--musher-teal-deep)); }
+.bg-musher-obsidian-indigo { background: linear-gradient(135deg, var(--musher-obsidian), var(--musher-indigo)); }
+.bg-musher-obsidian-navy { background: linear-gradient(135deg, var(--musher-obsidian), var(--musher-navy)); }

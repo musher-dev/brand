@@ -7,6 +7,10 @@
         "$value": ["Inter", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
         "$description": "Primary UI font - Engineering-grade sans-serif with excellent legibility"
       },
+      "display": {
+        "$value": ["Inter Display", "Inter", "system-ui", "sans-serif"],
+        "$description": "Display/heading font — optical-size variant of Inter for large text and wordmark"
+      },
       "mono": {
         "$value": ["JetBrains Mono", "Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", "monospace"],
         "$description": "Data display font - Monospace with tabular numerals for code and data"

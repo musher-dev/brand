@@ -23,8 +23,7 @@
     "ghcr.io/devcontainers/features/git:1": {},
     // GitHub CLI
     "ghcr.io/devcontainers/features/github-cli:1": {},
-    // Claude Code CLI
-    "ghcr.io/anthropics/devcontainer-features/claude-code:1": {},
+    // Claude Code CLI (installed via native installer in post-create.sh)
     // ShellCheck (shell script analysis)
     "ghcr.io/lukewiwa/features/shellcheck:0": {
       "version": "stable"
@@ -44,7 +43,8 @@
         "redhat.vscode-yaml",
         "timonwong.shellcheck",
         "eamodio.gitlens",
-        "bierner.markdown-mermaid"
+        "bierner.markdown-mermaid",
+        "tomoki1207.pdf"
       ],
       "settings": {
         "editor.formatOnSave": true,

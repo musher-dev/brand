@@ -1,0 +1,11 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Musher",
+  "url": "https://musher.dev",
+  "logo": "https://github.com/musher-dev/brand/raw/main/dist/logo/svg/musher-logo-mark-dark.svg",
+  "sameAs": [
+    "https://discord.gg/SaVMzMgX2c",
+    "https://github.com/musher-dev"
+  ]
+}

@@ -1,0 +1,1 @@
+Add JetBrains Mono font files here (WOFF2 recommended). See src/fonts/README.md.
