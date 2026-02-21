@@ -6,18 +6,32 @@ How to audit existing content against the Musher Brand guidelines.
 
 ## Quick Audit Checklist
 
-### 1. Cliche Check
+### 1. Banned Vocabulary Check
 
-Search content for these banned terms:
+Search content for banned terms. The canonical list lives in [brand-packet.md](brand-packet.md) (Field 7: Banned Vocabulary).
+
+**Default banned** (always — from brand packet):
 
 ```
-seamless, revolutionary, game-changing, cutting-edge,
-next-generation, best-in-class, world-class, easy,
-simple, magic, delight, empower, leverage, utilize,
-synergy, disrupt, transform, chatbot, hallucination
+supercharge, unleash, seamless, revolutionize, empower, robust, unlock, leverage
 ```
 
-**Action:** Replace with approved alternatives from the brand voice lexicon.
+**Product-specific banned** (from brand packet):
+
+```
+AI-powered, intelligent, cutting-edge, next-generation, scalable,
+game-changing, innovative, effortless, holistic, end-to-end,
+disruptive, frictionless
+```
+
+**Additional audit terms** (cliches and filler):
+
+```
+best-in-class, world-class, easy, simple, magic, delight,
+utilize, synergy, transform, chatbot, hallucination, revolutionary
+```
+
+**Action:** Replace with specific alternatives. See the brand packet's Field 7 for replacement strategies per word.
 
 ### 2. Voice Check
 
