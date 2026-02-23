@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://github.com/musher-dev/brand/compare/design-tokens-v2.1.0...design-tokens-v2.2.0) (2026-02-23)
+
+
+### Features
+
+* **tokens:** add consumption guide and fix package scope ([#7](https://github.com/musher-dev/brand/issues/7)) ([d8a89ac](https://github.com/musher-dev/brand/commit/d8a89acee9be5f57e37808dd01ddab027c84cdfd))
+
 ## [2.1.0](https://github.com/musher-dev/brand/compare/design-tokens-v2.0.0...design-tokens-v2.1.0) (2026-02-23)
 
 
