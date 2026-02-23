@@ -1,0 +1,23 @@
+name: Release PR
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    outputs:
+      design-tokens--release_created: ${{ steps.release.outputs['tokens--release_created'] }}
+      design-tokens--tag_name: ${{ steps.release.outputs['tokens--tag_name'] }}
+    steps:
+      - uses: googleapis/release-please-action@v4
+        id: release
+        with:
+          config-file: config/release/release-please-config.json
+          manifest-file: config/release/.release-please-manifest.json
