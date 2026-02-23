@@ -10,10 +10,6 @@ permissions:
   contents: read
   packages: write
 
-defaults:
-  run:
-    working-directory: tokens
-
 jobs:
   check-release:
     runs-on: ubuntu-latest
