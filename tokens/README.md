@@ -170,19 +170,81 @@ The console uses Tailwind v4 with CSS-first `@theme` configuration. Tokens are d
 Future: Import generated tokens:
 ```css
 @import 'tailwindcss';
-@import '@musher/design-tokens/dist/tailwind/theme.css';
+@import '@musher-dev/design-tokens/dist/tailwind/theme.css';
 ```
 
 ### Docs (Tailwind v4 + CSS)
 
 Future integration via CSS variables:
 ```css
-@import '@musher/design-tokens/dist/css/variables.css';
+@import '@musher-dev/design-tokens/dist/css/variables.css';
 ```
 
 ### Marketing (Tailwind v3)
 
 Future migration to Tailwind v4 with same pattern as Console.
+
+## Installation
+
+The package is published to GitHub Packages as `@musher-dev/design-tokens`.
+
+### 1. Configure GitHub Packages registry
+
+Add an `.npmrc` to your project root (or the repo root if using a monorepo):
+
+```ini
+@musher-dev:registry=https://npm.pkg.github.com
+```
+
+For CI, set the `NODE_AUTH_TOKEN` environment variable to a token with `read:packages` scope. Locally, authenticate with:
+
+```bash
+npm login --registry=https://npm.pkg.github.com --scope=@musher-dev
+```
+
+### 2. Install the package
+
+```bash
+# bun
+bun add @musher-dev/design-tokens
+
+# npm
+npm install @musher-dev/design-tokens
+```
+
+### 3. Import tokens
+
+**Tailwind v4** (Console, Docs):
+```css
+@import 'tailwindcss';
+@import '@musher-dev/design-tokens/dist/tailwind/theme.css';
+```
+
+**CSS custom properties** (any framework):
+```css
+@import '@musher-dev/design-tokens/dist/css/variables.css';
+```
+
+**Raw JSON** (scripts, tooling):
+```js
+import primitives from '@musher-dev/design-tokens/primitives/colors.json';
+import semantic from '@musher-dev/design-tokens/semantic/colors.dark.json';
+```
+
+### CI/CD
+
+In GitHub Actions, GitHub Packages authentication is automatic via `GITHUB_TOKEN`:
+
+```yaml
+- uses: actions/setup-node@v4
+  with:
+    registry-url: 'https://npm.pkg.github.com'
+    scope: '@musher-dev'
+
+- run: npm ci
+  env:
+    NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+```
 
 ## Build System
 
