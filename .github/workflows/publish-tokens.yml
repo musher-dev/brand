@@ -1,0 +1,48 @@
+name: Publish Design Tokens
+
+on:
+  push:
+    tags:
+      - 'design-tokens-v*'
+
+permissions:
+  contents: read
+  packages: write
+
+defaults:
+  run:
+    working-directory: tokens
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@musher-dev'
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Build tokens
+        run: bun run build
+
+      - name: Verify build output
+        run: |
+          test -f dist/css/variables.css || { echo "Missing dist/css/variables.css"; exit 1; }
+          test -f dist/tailwind/theme.css || { echo "Missing dist/tailwind/theme.css"; exit 1; }
+          echo "Build output verified"
+
+      - name: Publish to GitHub Packages
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
