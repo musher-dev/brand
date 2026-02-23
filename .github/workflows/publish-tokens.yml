@@ -1,9 +1,10 @@
 name: Publish Design Tokens
 
 on:
-  push:
-    tags:
-      - 'design-tokens-v*'
+  workflow_run:
+    workflows: ["Release PR"]
+    types: [completed]
+    branches: [main]
 
 permissions:
   contents: read
@@ -14,11 +15,65 @@ defaults:
     working-directory: tokens
 
 jobs:
+  check-release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    outputs:
+      released: ${{ steps.check.outputs.released }}
+      tag: ${{ steps.check.outputs.tag }}
+    steps:
+      - name: Check for design-tokens release tag
+        uses: actions/github-script@v8
+        id: check
+        with:
+          script: |
+            const commitSha = context.payload.workflow_run.head_sha;
+            console.log(`Checking for tags at commit: ${commitSha}`);
+
+            let allTags;
+            try {
+              allTags = await github.paginate(
+                github.rest.repos.listTags,
+                {
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  per_page: 100
+                }
+              );
+            } catch (error) {
+              core.setFailed(`Failed to list tags: ${error.message}`);
+              return;
+            }
+
+            const tag = allTags
+              .filter(t => t.name.startsWith('design-tokens-v') && t.commit.sha === commitSha)
+              .map(t => t.name)[0];
+
+            const released = tag ? 'true' : 'false';
+            console.log(`design-tokens: released=${released}, tag=${tag || 'none'}`);
+            core.setOutput('released', released);
+            core.setOutput('tag', tag || '');
+
+      - name: Summary
+        run: |
+          {
+            echo "### Release Check Summary"
+            echo ""
+            echo "| Package | Released | Tag |"
+            echo "|---------|----------|-----|"
+            echo "| design-tokens | ${{ steps.check.outputs.released }} | ${{ steps.check.outputs.tag }} |"
+          } >> "$GITHUB_STEP_SUMMARY"
+
   publish:
+    needs: check-release
+    if: needs.check-release.outputs.released == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.check-release.outputs.tag }}
 
       - name: Setup Node.js 22
         uses: actions/setup-node@v4
@@ -32,17 +87,21 @@ jobs:
 
       - name: Install dependencies
         run: bun install --frozen-lockfile
+        working-directory: tokens
 
       - name: Build tokens
         run: bun run build
+        working-directory: tokens
 
       - name: Verify build output
         run: |
           test -f dist/css/variables.css || { echo "Missing dist/css/variables.css"; exit 1; }
           test -f dist/tailwind/theme.css || { echo "Missing dist/tailwind/theme.css"; exit 1; }
           echo "Build output verified"
+        working-directory: tokens
 
       - name: Publish to GitHub Packages
         run: npm publish
+        working-directory: tokens
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
