@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.0](https://github.com/musher-dev/brand/compare/design-tokens-v2.2.0...design-tokens-v2.3.0) (2026-03-01)
+
+
+### Features
+
+* **tokens:** add --text-* Tailwind utility aliases ([#10](https://github.com/musher-dev/brand/issues/10)) ([e607cea](https://github.com/musher-dev/brand/commit/e607cea146d3d189372862ad9c9688119cbe33ad))
+
 ## [2.2.0](https://github.com/musher-dev/brand/compare/design-tokens-v2.1.0...design-tokens-v2.2.0) (2026-02-23)
 
 
