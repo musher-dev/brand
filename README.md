@@ -12,7 +12,7 @@ task setup && task build
 
 ```
 brand/
-├── tokens/        Design token system (@musher/design-tokens)
+├── tokens/        Design token system (@musher-dev/design-tokens)
 │   ├── primitives/    Tier 1: raw values (colors, typography, spacing, etc.)
 │   ├── semantic/      Tier 2: dark.json + light.json
 │   ├── transforms/    oklch.js color conversion
@@ -56,7 +56,7 @@ Examples:
 
 ## Design Tokens
 
-The token system lives in `tokens/` and is published as [`@musher/design-tokens`](https://www.npmjs.com/package/@musher/design-tokens).
+The token system lives in `tokens/` and is published as [`@musher-dev/design-tokens`](tokens/README.md).
 
 ```bash
 # Build tokens
