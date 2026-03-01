@@ -24,6 +24,10 @@
     // GitHub CLI
     "ghcr.io/devcontainers/features/github-cli:1": {},
     // Claude Code CLI (installed via native installer in post-create.sh)
+    // Bun runtime (fast JS runtime, used for token builds)
+    "ghcr.io/shyim/devcontainers-features/bun:0": {
+      "version": "latest"
+    },
     // ShellCheck (shell script analysis)
     "ghcr.io/lukewiwa/features/shellcheck:0": {
       "version": "stable"

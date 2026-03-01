@@ -4,7 +4,7 @@
   "workspaces": {
     "": {
       "name": "@musher-dev/design-tokens",
-      "dependencies": {
+      "devDependencies": {
         "style-dictionary": "^4.0.0",
       },
     },

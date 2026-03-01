@@ -125,7 +125,7 @@ install_token_deps() {
   log "Installing token dependencies..."
 
   if [ -d "tokens" ] && [ -f "tokens/package.json" ]; then
-    cd tokens && npm install && cd ..
+    cd tokens && bun install && cd ..
     log "Token dependencies installed"
   else
     log "WARNING: tokens/package.json not found, skipping"
@@ -135,7 +135,7 @@ install_token_deps() {
 # Verify tools
 verify_tools() {
   log "Verifying installed tools..."
-  local tools=(task node npm svgo sharp git-lfs claude gh)
+  local tools=(task node npm bun svgo sharp git-lfs claude gh)
 
   for cmd in "${tools[@]}"; do
     if command_exists "$cmd"; then
