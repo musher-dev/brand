@@ -1,6 +1,6 @@
 {
   "name": "@musher-dev/design-tokens",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "Design tokens for Musher platform - single source of truth for visual design",
   "type": "module",
   "scripts": {
