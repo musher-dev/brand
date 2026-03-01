@@ -14,7 +14,7 @@ tasks:
   setup:
     desc: Install dependencies
     cmds:
-      - npm install
+      - bun install
     sources:
       - package.json
     generates:
@@ -29,7 +29,7 @@ tasks:
     deps:
       - setup
     cmds:
-      - npm run build
+      - bun run build
     sources:
       - primitives/**/*.json
       - semantic/**/*.json
@@ -46,7 +46,7 @@ tasks:
   clean:
     desc: Clean build output
     cmds:
-      - npm run clean
+      - bun run clean
       - echo "Clean complete!"
 
   clean:all:

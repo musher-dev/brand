@@ -140,7 +140,7 @@ StyleDictionary.registerFormat({
 			' *',
 			' * Import this file after @import "tailwindcss" in your CSS:',
 			' * @import "tailwindcss";',
-			' * @import "@musher/design-tokens/dist/tailwind/theme.css";',
+			' * @import "@musher-dev/design-tokens/dist/tailwind/theme.css";',
 			' */',
 			'',
 			'@theme {',
@@ -189,6 +189,18 @@ StyleDictionary.registerFormat({
 			});
 			lines.push('');
 		});
+
+		// Text utility aliases — maps --text-* to --font-size-* for Tailwind text-* utilities
+		const textSizeNames = [
+			'label', 'data', 'body', 'body-large', 'heading-sm',
+			'heading', 'title', 'display', 'display-lg',
+		];
+
+		lines.push('  /* Text Utilities */');
+		textSizeNames.forEach((name) => {
+			lines.push(`  --text-${name}: var(--font-size-${name});`);
+		});
+		lines.push('');
 
 		lines.push('}');
 		return lines.join('\n');
