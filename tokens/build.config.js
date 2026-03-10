@@ -192,7 +192,7 @@ StyleDictionary.registerFormat({
 
 		// Text utility aliases — maps --text-* to --font-size-* for Tailwind text-* utilities
 		const textSizeNames = [
-			'label', 'data', 'body', 'body-large', 'heading-sm',
+			'label', 'data', 'body', 'body-large', 'body-reading', 'heading-sm',
 			'heading', 'title', 'display', 'display-lg',
 		];
 
