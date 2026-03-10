@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.0](https://github.com/musher-dev/brand/compare/design-tokens-v2.3.0...design-tokens-v2.4.0) (2026-03-10)
+
+
+### Features
+
+* **tokens:** add body-reading font-size and line-height tokens ([#14](https://github.com/musher-dev/brand/issues/14)) ([a1422ad](https://github.com/musher-dev/brand/commit/a1422adea8d845188d652d4765ef0757ff1d9f8f)), closes [#13](https://github.com/musher-dev/brand/issues/13)
+
 ## [2.3.0](https://github.com/musher-dev/brand/compare/design-tokens-v2.2.0...design-tokens-v2.3.0) (2026-03-01)
 
 
