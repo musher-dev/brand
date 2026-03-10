@@ -34,6 +34,10 @@
         "$value": "16px",
         "$description": "Large body text, introductions"
       },
+      "body-reading": {
+        "$value": "16px",
+        "$description": "Reading body text — WCAG 1.4.8 compliant for long-form prose (docs, articles, help)"
+      },
       "heading-sm": {
         "$value": "16px",
         "$description": "Small headings, section labels"
@@ -87,6 +91,10 @@
       "body": {
         "$value": 1.57,
         "$description": "Body text line height - 22px at 14px font"
+      },
+      "body-reading": {
+        "$value": 1.65,
+        "$description": "Reading body line height — generous spacing for long-form prose (26.4px at 16px)"
       },
       "heading-sm": {
         "$value": 1.5,

@@ -180,6 +180,14 @@ Future integration via CSS variables:
 @import '@musher-dev/design-tokens/dist/css/variables.css';
 ```
 
+#### Body text tokens at a glance
+
+| Context | Font Size Token | Line Height Token | When to use |
+|---------|----------------|-------------------|-------------|
+| Console UI, dashboards | `body` (14px) | `body` (1.57) | Default for dense UI |
+| Docs, blog, help articles | `body-reading` (16px) | `body-reading` (1.65) | Long-form prose (WCAG 1.4.8) |
+| Introductions, callouts | `body-large` (16px) | `body` (1.57) | Visually prominent short text |
+
 ### Marketing (Tailwind v3)
 
 Future migration to Tailwind v4 with same pattern as Console.
