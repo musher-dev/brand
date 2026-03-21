@@ -190,6 +190,101 @@ export_illustrations() {
   log "Exported $count illustration file(s)"
 }
 
+# Export Hub logo SVGs
+# Copies mark SVGs directly; copies outlined lockup/wordmark SVGs (stripping -outlined suffix).
+# Non-outlined SVGs without an outlined counterpart are also copied.
+export_hub_logo_svgs() {
+  local count=0
+  local dst_path="$DIST_DIR/logo/hub/svg"
+
+  # Mark SVGs (all)
+  local mark_path="$SRC_DIR/logo/hub/mark"
+  if [ -d "$mark_path" ]; then
+    while IFS= read -r -d '' file; do
+      cp "$file" "$dst_path/"
+      count=$((count + 1))
+    done < <(find "$mark_path" -maxdepth 1 -name "*.svg" -print0 2>/dev/null)
+  fi
+
+  # Lockup SVGs (outlined preferred, strip suffix; include non-outlined without counterpart)
+  local lockup_path="$SRC_DIR/logo/hub/lockup"
+  if [ -d "$lockup_path" ]; then
+    while IFS= read -r -d '' file; do
+      local name
+      name=$(basename "$file" | sed 's/-outlined//')
+      cp "$file" "$dst_path/$name"
+      count=$((count + 1))
+    done < <(find "$lockup_path" -name "*-outlined.svg" -print0 2>/dev/null)
+
+    while IFS= read -r -d '' file; do
+      local name
+      name=$(basename "$file")
+      [[ "$name" == *-outlined.svg ]] && continue
+      local outlined="${file%.svg}-outlined.svg"
+      if [ ! -f "$outlined" ]; then
+        cp "$file" "$dst_path/$name"
+        count=$((count + 1))
+      fi
+    done < <(find "$lockup_path" -name "*.svg" -print0 2>/dev/null)
+  fi
+
+  # Wordmark SVGs (same logic)
+  local wordmark_path="$SRC_DIR/logo/hub/wordmark"
+  if [ -d "$wordmark_path" ]; then
+    while IFS= read -r -d '' file; do
+      local name
+      name=$(basename "$file" | sed 's/-outlined//')
+      cp "$file" "$dst_path/$name"
+      count=$((count + 1))
+    done < <(find "$wordmark_path" -maxdepth 1 -name "*-outlined.svg" -print0 2>/dev/null)
+
+    while IFS= read -r -d '' file; do
+      local name
+      name=$(basename "$file")
+      [[ "$name" == *-outlined.svg ]] && continue
+      local outlined="${file%.svg}-outlined.svg"
+      if [ ! -f "$outlined" ]; then
+        cp "$file" "$dst_path/$name"
+        count=$((count + 1))
+      fi
+    done < <(find "$wordmark_path" -maxdepth 1 -name "*.svg" -print0 2>/dev/null)
+  fi
+
+  log "Exported $count Hub logo SVG(s) to dist/logo/hub/svg/"
+}
+
+# Export Hub logo PNGs
+export_hub_logo_pngs() {
+  local count=0
+  local png_dir="$DIST_DIR/logo/hub/png"
+
+  local mark_path="$SRC_DIR/logo/hub/mark"
+  if [ -d "$mark_path" ]; then
+    while IFS= read -r -d '' file; do
+      cp "$file" "$png_dir/"
+      count=$((count + 1))
+    done < <(find "$mark_path" -maxdepth 1 -name "*.png" -print0 2>/dev/null)
+  fi
+
+  log "Exported $count Hub logo PNG(s) to dist/logo/hub/png/"
+}
+
+# Export Hub icon assets (favicons)
+export_hub_icons() {
+  local count=0
+  local src_path="$SRC_DIR/icon/hub/favicon"
+  local dst_path="$DIST_DIR/icon/hub/favicon"
+
+  if [ -d "$src_path" ]; then
+    while IFS= read -r -d '' file; do
+      cp "$file" "$dst_path/"
+      count=$((count + 1))
+    done < <(find "$src_path" -maxdepth 1 -type f -print0 2>/dev/null)
+  fi
+
+  log "Exported $count Hub icon file(s)"
+}
+
 log "Exporting assets from $SRC_DIR to $DIST_DIR..."
 export_logo_svgs
 export_logo_pngs
@@ -197,4 +292,7 @@ export_illustrations
 export_icons
 export_social
 export_backgrounds
+export_hub_logo_svgs
+export_hub_logo_pngs
+export_hub_icons
 log "Done!"

@@ -98,9 +98,37 @@ validate_favicons() {
   fi
 }
 
+# Validate expected Hub favicon files exist (only if there are real files)
+validate_hub_favicons() {
+  local favicon_dir="$DIST_DIR/icon/hub/favicon"
+
+  if [ ! -d "$favicon_dir" ]; then
+    log "No Hub favicon directory found, skipping Hub favicon validation"
+    return
+  fi
+
+  local file_count
+  file_count=$(find "$favicon_dir" -type f ! -name ".gitkeep" 2>/dev/null | wc -l)
+
+  if [ "$file_count" -eq 0 ]; then
+    log "No Hub favicon files yet, skipping Hub favicon validation"
+    return
+  fi
+
+  log "Checking expected Hub favicon files..."
+
+  local expected_favicons=("musher-hub-favicon.ico" "musher-hub-favicon.svg")
+  for expected in "${expected_favicons[@]}"; do
+    if [ ! -f "$favicon_dir/$expected" ]; then
+      err "Missing expected Hub favicon: $expected"
+    fi
+  done
+}
+
 log "Validating dist/ in $ROOT_DIR..."
 validate_naming
 validate_favicons
+validate_hub_favicons
 
 if [ "$errors" -gt 0 ]; then
   log "Validation failed with $errors error(s)"
