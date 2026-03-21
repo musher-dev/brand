@@ -29,40 +29,73 @@ done
 LOGO_SIZES=(64 128 256 512 1024)
 
 # Export logo SVGs
+# Copies outlined/plain SVGs to dist. Skips *-text.svg (editable, not portable).
 export_logo_svgs() {
   local count=0
-  for subdir in mark wordmark lockup; do
-    local src_path="$SRC_DIR/logo/$subdir"
-    local dst_path="$DIST_DIR/logo/svg"
+  local dst_path="$DIST_DIR/logo/svg"
 
-    if [ -d "$src_path" ]; then
-      while IFS= read -r -d '' file; do
-        cp "$file" "$dst_path/"
-        count=$((count + 1))
-      done < <(find "$src_path" -name "*.svg" -print0 2>/dev/null)
-    fi
-  done
+  # Mark SVGs (plain, no outlined/text distinction)
+  local mark_path="$SRC_DIR/logo/mark"
+  if [ -d "$mark_path" ]; then
+    while IFS= read -r -d '' file; do
+      cp "$file" "$dst_path/"
+      count=$((count + 1))
+    done < <(find "$mark_path" -maxdepth 1 -name "*.svg" -print0 2>/dev/null)
+  fi
+
+  # Wordmark SVGs (export outlined only, strip -outlined suffix for dist)
+  local wordmark_path="$SRC_DIR/logo/wordmark"
+  if [ -d "$wordmark_path" ]; then
+    while IFS= read -r -d '' file; do
+      local name
+      name=$(basename "$file" | sed 's/-outlined//')
+      cp "$file" "$dst_path/$name"
+      count=$((count + 1))
+    done < <(find "$wordmark_path" -maxdepth 1 -name "*-outlined.svg" -print0 2>/dev/null)
+  fi
+
+  # Lockup SVGs (recurse into layout subdirs, export outlined only, strip -outlined suffix)
+  local lockup_path="$SRC_DIR/logo/lockup"
+  if [ -d "$lockup_path" ]; then
+    while IFS= read -r -d '' file; do
+      local name
+      name=$(basename "$file" | sed 's/-outlined//')
+      cp "$file" "$dst_path/$name"
+      count=$((count + 1))
+    done < <(find "$lockup_path" -name "*-outlined.svg" -print0 2>/dev/null)
+  fi
 
   log "Exported $count logo SVG(s) to dist/logo/svg/"
 }
 
-# Generate rasterized PNGs from SVGs
+# Export logo PNGs
+# Copies pre-rendered PNGs from src (lockups have non-square aspect ratios).
+# Falls back to generating from SVGs for marks at standard square sizes.
 export_logo_pngs() {
   local count=0
-  local svg_dir="$DIST_DIR/logo/svg"
   local png_dir="$DIST_DIR/logo/png"
 
-  while IFS= read -r -d '' svg; do
-    local basename
-    basename=$(basename "$svg" .svg)
+  # Copy pre-rendered PNGs from all logo subdirectories
+  for subdir in mark wordmark; do
+    local src_path="$SRC_DIR/logo/$subdir"
+    if [ -d "$src_path" ]; then
+      while IFS= read -r -d '' file; do
+        cp "$file" "$png_dir/"
+        count=$((count + 1))
+      done < <(find "$src_path" -maxdepth 1 -name "*.png" -print0 2>/dev/null)
+    fi
+  done
 
-    for size in "${LOGO_SIZES[@]}"; do
-      local output="$png_dir/${basename}-${size}.png"
-      sharp --input "$svg" --output "$output" -- resize "$size" "$size" -- png 2>/dev/null && count=$((count + 1))
-    done
-  done < <(find "$svg_dir" -name "*.svg" -print0 2>/dev/null)
+  # Copy lockup PNGs from layout subdirectories
+  local lockup_path="$SRC_DIR/logo/lockup"
+  if [ -d "$lockup_path" ]; then
+    while IFS= read -r -d '' file; do
+      cp "$file" "$png_dir/"
+      count=$((count + 1))
+    done < <(find "$lockup_path" -name "*.png" -print0 2>/dev/null)
+  fi
 
-  log "Generated $count logo PNG(s) to dist/logo/png/"
+  log "Exported $count logo PNG(s) to dist/logo/png/"
 }
 
 # Export icon assets
@@ -135,9 +168,32 @@ export_backgrounds() {
   log "Exported $count background asset(s)"
 }
 
+# Export illustration assets
+export_illustrations() {
+  local count=0
+  local src_path="$SRC_DIR/illustration/scene"
+  local svg_dst="$DIST_DIR/illustration/svg"
+  local png_dst="$DIST_DIR/illustration/png"
+
+  if [ -d "$src_path" ]; then
+    while IFS= read -r -d '' file; do
+      cp "$file" "$svg_dst/"
+      count=$((count + 1))
+    done < <(find "$src_path" -maxdepth 1 -name "*.svg" -print0 2>/dev/null)
+
+    while IFS= read -r -d '' file; do
+      cp "$file" "$png_dst/"
+      count=$((count + 1))
+    done < <(find "$src_path" -maxdepth 1 -name "*.png" -print0 2>/dev/null)
+  fi
+
+  log "Exported $count illustration file(s)"
+}
+
 log "Exporting assets from $SRC_DIR to $DIST_DIR..."
 export_logo_svgs
 export_logo_pngs
+export_illustrations
 export_icons
 export_social
 export_backgrounds
