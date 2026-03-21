@@ -121,6 +121,76 @@ Keep clear space around the logo of at least **10% of the icon height** on all s
 
 ---
 
+## Musher Hub (Igloo) Branding
+
+The [Musher Hub](https://hub.musher.dev/) sub-product has its own logo mark — the **igloo** — along with dedicated lockups, wordmark, and favicon bundle. All Hub assets follow the same naming convention with a `musher-hub-` prefix.
+
+### Mark (igloo icon)
+
+| File | Size | Description |
+|------|------|-------------|
+| `musher-hub-mark-on-obsidian.svg` | Vector | Igloo on Obsidian background |
+| `musher-hub-mark-on-white.svg` | Vector | Igloo on white background |
+| `musher-hub-mark-cool-silver.svg` | Vector | Cool Silver igloo, transparent |
+| `musher-hub-mark-obsidian.svg` | Vector | Obsidian igloo, transparent |
+| `musher-hub-mark-currentcolor.svg` | Vector | CSS `currentColor` — style via CSS |
+| `musher-hub-mark-*-{256,512,1024}.png` | 256–1024px | Raster variants |
+
+### Lockup — Horizontal (igloo left, "Musher Hub" right)
+
+Recommended default for the Hub header nav bar.
+
+| File | Description |
+|------|-------------|
+| `musher-hub-lockup-horizontal-cool-silver-transparent.svg` | For dark backgrounds (recommended) |
+| `musher-hub-lockup-horizontal-obsidian-transparent.svg` | For light backgrounds |
+| `musher-hub-lockup-horizontal-on-obsidian.svg` | On Obsidian |
+| `musher-hub-lockup-horizontal-on-white.svg` | On white |
+| `musher-hub-lockup-horizontal-stacktext-*.svg` | Narrower variant with stacked text |
+
+### Lockup — Stacked (igloo above "Musher Hub")
+
+| File | Description |
+|------|-------------|
+| `musher-hub-lockup-stacked-cool-silver-transparent.svg` | Transparent, Cool Silver |
+| `musher-hub-lockup-stacked-on-obsidian.svg` | On Obsidian |
+| `musher-hub-lockup-stacked-on-white.svg` | On white |
+| `musher-hub-lockup-stacked-twoline-on-obsidian.svg` | Two-line text variant |
+
+### Wordmark ("Musher Hub" text only)
+
+| File | Description |
+|------|-------------|
+| `musher-hub-wordmark-cool-silver.svg` | Cool Silver (for dark backgrounds) |
+| `musher-hub-wordmark-obsidian.svg` | Obsidian (for light backgrounds) |
+| `musher-hub-wordmark-on-obsidian.svg` | On Obsidian background |
+| `musher-hub-wordmark-on-white.svg` | On white background |
+
+### Hub Favicon Bundle
+
+Located in `dist/icon/hub/favicon/`. Drop-in set for hub.musher.dev.
+
+| File | Description |
+|------|-------------|
+| `musher-hub-favicon.ico` | Legacy favicon |
+| `musher-hub-favicon.svg` | Modern SVG favicon |
+| `musher-hub-apple-touch-180.png` | Apple touch icon |
+| `musher-hub-pwa-192.png` | PWA icon 192px |
+| `musher-hub-pwa-512.png` | PWA icon 512px |
+| `musher-hub-pwa-maskable-512.png` | PWA maskable icon |
+| `musher-hub-manifest.webmanifest` | Web app manifest |
+
+Source files: `src/logo/hub/` and `src/icon/hub/favicon/`
+Production files: `dist/logo/hub/` and `dist/icon/hub/favicon/`
+
+### Colors
+
+Hub assets use the standard Musher palette:
+- **Obsidian** `#0B0F14` — primary dark background
+- **Cool Silver** `#CBD5E1` — primary foreground on dark
+
+---
+
 ## Illustration
 
 The original musher/sled/robots scene has been reclassified as a brand illustration. It is not part of the primary logo system but remains available for decorative and marketing use.

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+
+    <style>
+      :root { --icon: #0B0F14; }
+      @media (prefers-color-scheme: dark) { :root { --icon: #CBD5E1; } }
+      path { fill: var(--icon); }
+    </style>
+    
+<g transform="translate(34.56,46.00) scale(0.293296)">
+  <path d="M 610 0 L 576 37 L 432 77 L 285 173 L 167 299 L 83 440 L 51 562 L 0 652 L 0 982 L 26 999 L 24 1231 L 113 1266 L 197 1214 L 201 995 L 229 978 L 291 1021 L 351 1136 L 353 1391 L 397 1431 L 460 1431 L 614 1330 L 885 1332 L 1030 1431 L 1094 1431 L 1137 1391 L 1139 1137 L 1200 1020 L 1251 983 L 1290 997 L 1294 1214 L 1401 1268 L 1467 1231 L 1467 1044 L 1509 1014 L 1509 652 L 1377 349 L 1292 239 L 1176 136 L 1075 76 L 936 38 L 899 0 Z"/>
+</g>
+</svg>

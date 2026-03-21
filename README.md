@@ -24,11 +24,19 @@ brand/
 │   │   ├── lockup/        Icon + wordmark combinations
 │   │   │   ├── horizontal/    Primary: icon left, wordmark right
 │   │   │   └── stacked/       Icon above wordmark
-│   │   └── wordmark/      "Musher" text (outlined + editable variants)
+│   │   ├── wordmark/      "Musher" text (outlined + editable variants)
+│   │   └── hub/           Musher Hub (igloo) sub-product branding
+│   │       ├── mark/          Igloo icon (5 color schemes + PNGs)
+│   │       ├── lockup/        Hub icon + "Musher Hub" wordmark
+│   │       │   ├── horizontal/    Horizontal + stacked-text variants
+│   │       │   └── stacked/       Icon above wordmark
+│   │       └── wordmark/      "Musher Hub" text-only
 │   ├── illustration/  Brand illustrations
 │   │   ├── scene/         Musher/sled/robots artwork
 │   │   └── masters/       Design source files
 │   ├── icon/          Favicon, PWA, iOS, Android sources
+│   │   └── hub/           Musher Hub favicon bundle
+│   │       └── favicon/       ico, svg, apple-touch, pwa, manifest
 │   ├── social/        Avatars, banners, OG templates
 │   │   ├── discord/       Server icon, banner, avatar
 │   │   └── github/        Organization social preview
@@ -37,8 +45,13 @@ brand/
 │
 ├── dist/          Optimized production exports (committed)
 │   ├── logo/          Outlined SVGs + rasterized PNGs
+│   │   └── hub/           Hub igloo logo exports
+│   │       ├── svg/           Hub mark, lockup, wordmark SVGs
+│   │       └── png/           Hub mark rasters (256–1024)
 │   ├── illustration/  Scene illustration exports
 │   ├── icon/          Full favicon/PWA/mobile icon sets
+│   │   └── hub/           Hub-specific icon exports
+│   │       └── favicon/       Hub favicon bundle
 │   ├── social/        Platform-specific social assets
 │   │   ├── discord/       Discord server icon, banner, avatar
 │   │   └── github/        GitHub organization social preview
