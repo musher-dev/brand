@@ -19,7 +19,15 @@ brand/
 │   └── dist/          Generated CSS + Tailwind output (gitignored)
 │
 ├── src/           Source/editable master assets
-│   ├── logo/          Mark, wordmark, lockup SVGs + design files
+│   ├── logo/          Astronaut mark, wordmark, lockup SVGs
+│   │   ├── mark/          Astronaut head icon (4 color schemes)
+│   │   ├── lockup/        Icon + wordmark combinations
+│   │   │   ├── horizontal/    Primary: icon left, wordmark right
+│   │   │   └── stacked/       Icon above wordmark
+│   │   └── wordmark/      "Musher" text (outlined + editable variants)
+│   ├── illustration/  Brand illustrations
+│   │   ├── scene/         Musher/sled/robots artwork
+│   │   └── masters/       Design source files
 │   ├── icon/          Favicon, PWA, iOS, Android sources
 │   ├── social/        Avatars, banners, OG templates
 │   │   ├── discord/       Server icon, banner, avatar
@@ -28,7 +36,8 @@ brand/
 │   └── fonts/         Inter, Inter Display, JetBrains Mono
 │
 ├── dist/          Optimized production exports (committed)
-│   ├── logo/          Optimized SVGs + rasterized PNGs
+│   ├── logo/          Outlined SVGs + rasterized PNGs
+│   ├── illustration/  Scene illustration exports
 │   ├── icon/          Full favicon/PWA/mobile icon sets
 │   ├── social/        Platform-specific social assets
 │   │   ├── discord/       Discord server icon, banner, avatar

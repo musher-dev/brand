@@ -36,8 +36,8 @@ validate_naming() {
     local name
     name=$(basename "$file")
 
-    # Skip .gitkeep and .md files
-    if [ "$name" = ".gitkeep" ] || [[ "$name" == *.md ]]; then
+    # Skip .gitkeep, .md, and .css files (e.g. gradients.css)
+    if [ "$name" = ".gitkeep" ] || [[ "$name" == *.md ]] || [[ "$name" == *.css ]]; then
       skipped=$((skipped + 1))
       continue
     fi

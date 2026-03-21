@@ -47,35 +47,65 @@ These are the canonical brand colors used across logos, marketing, and asset pro
 
 ## Logo Usage
 
+The Musher logo mark is the **astronaut head**. It uses negative-space cutouts for detail — on transparent versions, the background shows through.
+
 ### Variants
 
 | Variant | When to Use | Available Themes |
 |---------|-------------|------------------|
-| **Mark** (icon only) | Avatars, favicons, app icons, small placements | dark, light, dark-transparent, light-transparent |
-| **Lockup** (icon + wordmark) | Headers, marketing, brand-heavy contexts | dark, transparent |
+| **Mark** (astronaut icon) | Avatars, favicons, app icons, small placements | dark, light, dark-transparent, light-transparent |
+| **Lockup — Horizontal** (icon + wordmark) | Headers, marketing, brand-heavy contexts (primary) | dark, light, dark-transparent, light-transparent |
+| **Lockup — Stacked** (icon above wordmark) | Square placements, social profiles, presentations | dark, light, dark-transparent, light-transparent |
 | **Wordmark** (text only) | When the icon would be too small or cluttered | dark, light |
 
 ### Formats
 
-- **SVG** (vector): `dist/logo/svg/` — use for web, documentation, and scalable contexts
-- **PNG** (raster): `dist/logo/png/` — use for social media, presentations, and fixed-size contexts
+- **SVG** (vector): `dist/logo/svg/` — outlined paths, no font dependency. Use for web, documentation, and scalable contexts.
+- **PNG** (raster): `dist/logo/png/` — pre-rendered at standard sizes. Use for social media, presentations, and fixed-size contexts.
+- **Source SVGs**: `src/logo/` also contains `*-text.svg` variants with editable text (requires Inter Display Bold). These are design sources, not production assets.
 
-### Available Files
+### Available Files (dist/)
+
+**Mark (astronaut)**
 
 | File | Size | Description |
 |------|------|-------------|
-| `musher-logo-mark-dark.svg` | Vector | Mark on Obsidian background |
-| `musher-logo-mark-dark-transparent.svg` | Vector | Mark, transparent background, Cool Silver fill |
-| `musher-logo-mark-light.svg` | Vector | Mark on white background |
-| `musher-logo-mark-light-transparent.svg` | Vector | Mark, transparent background, Obsidian fill |
-| `musher-logo-lockup-dark.svg` | Vector | Full lockup on Obsidian |
-| `musher-logo-lockup-transparent.svg` | Vector | Full lockup, transparent background |
-| `musher-logo-wordmark-dark.svg` | Vector | Wordmark, Cool Silver |
-| `musher-logo-wordmark-light.svg` | Vector | Wordmark, Obsidian |
-| `musher-logo-mark-dark-512.png` | 512px | Mark raster, dark |
-| `musher-logo-mark-dark-1024.png` | 1024px | Mark raster, dark |
-| `musher-logo-lockup-dark-512.png` | 512w | Lockup raster, dark |
-| `musher-logo-lockup-dark-1024.png` | 1024w | Lockup raster, dark |
+| `musher-logo-mark-dark.svg` | Vector | Astronaut mark on Obsidian background |
+| `musher-logo-mark-dark-transparent.svg` | Vector | Astronaut mark, transparent background, Cool Silver fill |
+| `musher-logo-mark-light.svg` | Vector | Astronaut mark on white background |
+| `musher-logo-mark-light-transparent.svg` | Vector | Astronaut mark, transparent background, Obsidian fill |
+| `musher-logo-mark-dark-{256,512,1024}.png` | 256–1024px | Raster marks, dark |
+| `musher-logo-mark-light-{256,512,1024}.png` | 256–1024px | Raster marks, light |
+| `musher-logo-mark-{dark,light}-transparent-{256,512,1024}.png` | 256–1024px | Raster marks, transparent |
+
+**Lockup — Horizontal** (astronaut left, wordmark right)
+
+| File | Size | Description |
+|------|------|-------------|
+| `musher-logo-lockup-horizontal-dark.svg` | Vector | Horizontal lockup on Obsidian |
+| `musher-logo-lockup-horizontal-light.svg` | Vector | Horizontal lockup on white |
+| `musher-logo-lockup-horizontal-{dark,light}-transparent.svg` | Vector | Transparent background |
+| `musher-logo-lockup-horizontal-*-1400x512.png` | 1400x512 | Raster (1x) |
+| `musher-logo-lockup-horizontal-*-2800x1024.png` | 2800x1024 | Raster (2x) |
+
+**Lockup — Stacked** (astronaut above wordmark)
+
+| File | Size | Description |
+|------|------|-------------|
+| `musher-logo-lockup-stacked-dark.svg` | Vector | Stacked lockup on Obsidian |
+| `musher-logo-lockup-stacked-light.svg` | Vector | Stacked lockup on white |
+| `musher-logo-lockup-stacked-{dark,light}-transparent.svg` | Vector | Transparent background |
+| `musher-logo-lockup-stacked-*-1024x1024.png` | 1024x1024 | Raster (1x) |
+| `musher-logo-lockup-stacked-*-2048x2048.png` | 2048x2048 | Raster (2x) |
+
+**Wordmark** ("Musher" text, set in Inter Display Bold)
+
+| File | Size | Description |
+|------|------|-------------|
+| `musher-logo-wordmark-dark.svg` | Vector | Cool Silver wordmark (for dark backgrounds) |
+| `musher-logo-wordmark-light.svg` | Vector | Obsidian wordmark (for light backgrounds) |
+| `musher-logo-wordmark-dark-{943x266,1886x532}.png` | 943–1886px | Raster, dark |
+| `musher-logo-wordmark-light-{943x266,1886x532}.png` | 943–1886px | Raster, light |
 
 ### Clear Space
 
@@ -88,6 +118,27 @@ Keep clear space around the logo of at least **10% of the icon height** on all s
 - Don't add drop shadows, outlines, or effects to the core mark
 - Don't use low-contrast color combinations (e.g., Cool Silver on white)
 - Don't place the mark on busy backgrounds without sufficient clear space
+
+---
+
+## Illustration
+
+The original musher/sled/robots scene has been reclassified as a brand illustration. It is not part of the primary logo system but remains available for decorative and marketing use.
+
+### Available Files
+
+| File | Description |
+|------|-------------|
+| `musher-illustration-scene-dark.svg` | Scene on Obsidian background |
+| `musher-illustration-scene-dark-transparent.svg` | Scene, transparent background, Cool Silver fill |
+| `musher-illustration-scene-light.svg` | Scene on white background |
+| `musher-illustration-scene-light-transparent.svg` | Scene, transparent background, Obsidian fill |
+| `musher-illustration-scene-lockup-dark.svg` | Scene with wordmark, Obsidian |
+| `musher-illustration-scene-lockup-transparent.svg` | Scene with wordmark, transparent |
+
+Source files: `src/illustration/scene/`
+Design masters: `src/illustration/masters/`
+Production files: `dist/illustration/svg/` and `dist/illustration/png/`
 
 ---
 
@@ -125,19 +176,17 @@ Keep clear space around the logo of at least **10% of the icon height** on all s
 
 ### Avatars
 
-General-purpose profile images. Use across platforms that accept square avatars.
+General-purpose profile images. The default avatars use the astronaut mark. Scene-based avatars (old musher/sled) are available as alternates.
 
 | File | Size | Description |
 |------|------|-------------|
-| `musher-social-avatar-dark-512.png` | 512x512 | Mark on Obsidian |
-| `musher-social-avatar-dark-1024.png` | 1024x1024 | Mark on Obsidian (high-res) |
-| `musher-social-avatar-dark.svg` | Vector | Mark on Obsidian (scalable) |
-| `musher-social-avatar-light-512.png` | 512x512 | Mark on white |
-| `musher-social-avatar-light-1024.png` | 1024x1024 | Mark on white (high-res) |
-| `musher-social-avatar-astronaut-dark-512.png` | 512x512 | Astronaut variant, dark |
-| `musher-social-avatar-astronaut-dark-1024.png` | 1024x1024 | Astronaut variant, dark (high-res) |
-| `musher-social-avatar-astronaut-light-512.png` | 512x512 | Astronaut variant, light |
-| `musher-social-avatar-astronaut-light-1024.png` | 1024x1024 | Astronaut variant, light (high-res) |
+| `musher-social-avatar-dark-512.png` | 512x512 | Astronaut mark on Obsidian |
+| `musher-social-avatar-dark-1024.png` | 1024x1024 | Astronaut mark on Obsidian (high-res) |
+| `musher-social-avatar-light-512.png` | 512x512 | Astronaut mark on white |
+| `musher-social-avatar-light-1024.png` | 1024x1024 | Astronaut mark on white (high-res) |
+| `musher-social-avatar-scene-dark.svg` | Vector | Scene illustration on Obsidian |
+| `musher-social-avatar-scene-light-512.png` | 512x512 | Scene illustration on white |
+| `musher-social-avatar-scene-light-1024.png` | 1024x1024 | Scene illustration on white (high-res) |
 
 ### Platform Banners
 
@@ -286,6 +335,8 @@ musher-{category}-{variant}-{modifier}-{size}.{ext}
 
 Examples:
 - `musher-logo-mark-dark-512.png`
+- `musher-logo-lockup-horizontal-dark-1400x512.png`
+- `musher-illustration-scene-dark.svg`
 - `musher-social-banner-x-dark.png`
 - `musher-icon-favicon-32.png`
 - `musher-bg-gradient-teal-1080.png`
@@ -304,7 +355,7 @@ What to use where:
 | iOS home screen | `dist/icon/ios/musher-icon-apple-touch-180.png` |
 | Android home screen | `dist/icon/android/musher-icon-android-192.png` |
 | PWA splash | `dist/icon/android/musher-icon-android-512.png` |
-| Website header | `dist/logo/svg/musher-logo-lockup-dark.svg` |
+| Website header | `dist/logo/svg/musher-logo-lockup-horizontal-dark.svg` |
 | GitHub org avatar | `dist/social/avatar/musher-social-avatar-dark-512.png` |
 | GitHub social preview | `dist/social/github/musher-social-github-preview-640.png` |
 | Discord server icon | `dist/social/discord/musher-social-discord-icon-512.png` |
