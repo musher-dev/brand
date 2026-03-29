@@ -2,8 +2,10 @@
  * Style Dictionary v4 Build Configuration
  *
  * Generates:
- * - dist/css/variables.css - Standard CSS custom properties
- * - dist/tailwind/theme.css - Tailwind v4 @theme compatible output
+ * - dist/css/variables.css      - CSS custom properties (dark, :root)
+ * - dist/css/variables.light.css - CSS custom properties (light, [data-theme="light"])
+ * - dist/tailwind/theme.css      - Tailwind v4 @theme (dark)
+ * - dist/tailwind/theme.light.css - Tailwind v4 @theme (light)
  */
 
 import StyleDictionary from 'style-dictionary';
@@ -128,6 +130,46 @@ StyleDictionary.registerFormat({
 });
 
 /**
+ * CSS Variables format - Light mode with [data-theme="light"] selector
+ */
+StyleDictionary.registerFormat({
+	name: 'css/variables-light',
+	format: ({ dictionary }) => {
+		const lines = [
+			'/**',
+			' * Musher Design Tokens - Light Mode',
+			' * Auto-generated - do not edit directly',
+			' */',
+			'',
+			'[data-theme="light"] {',
+		];
+
+		const categories = {};
+
+		dictionary.allTokens.forEach((token) => {
+			const category = token.path[0];
+			if (!categories[category]) {
+				categories[category] = [];
+			}
+			categories[category].push(token);
+		});
+
+		Object.entries(categories).forEach(([category, tokens]) => {
+			lines.push(`  /* ${category.charAt(0).toUpperCase() + category.slice(1)} */`);
+			tokens.forEach((token) => {
+				const name = token.path.join('-');
+				const value = token.$value || token.value;
+				lines.push(`  --${name}: ${value};`);
+			});
+			lines.push('');
+		});
+
+		lines.push('}');
+		return lines.join('\n');
+	},
+});
+
+/**
  * Tailwind v4 @theme format
  */
 StyleDictionary.registerFormat({
@@ -165,6 +207,13 @@ StyleDictionary.registerFormat({
 			easing: 'transition-timing-function',
 		};
 
+		// Tailwind v4 sub-namespace overrides for font tokens
+		const fontSubNamespaceMap = {
+			weight: 'font-weight',
+			lineHeight: 'leading',
+			letterSpacing: 'tracking',
+		};
+
 		// Group and output tokens
 		const categories = {};
 
@@ -181,9 +230,20 @@ StyleDictionary.registerFormat({
 			lines.push(`  /* ${category.charAt(0).toUpperCase() + category.slice(1)} */`);
 
 			tokens.forEach((token) => {
-				// Build the CSS variable name with Tailwind namespace
-				const tokenPath = token.path.slice(1).join('-');
-				const varName = tokenPath ? `--${namespace}-${tokenPath}` : `--${namespace}`;
+				// Check for font sub-namespace overrides (weight, lineHeight, letterSpacing)
+				let effectiveNamespace = namespace;
+				let effectivePath = token.path.slice(1);
+
+				if (category === 'font' && token.path.length >= 3) {
+					const subCategory = token.path[1];
+					if (fontSubNamespaceMap[subCategory]) {
+						effectiveNamespace = fontSubNamespaceMap[subCategory];
+						effectivePath = token.path.slice(2);
+					}
+				}
+
+				const tokenPath = effectivePath.join('-');
+				const varName = tokenPath ? `--${effectiveNamespace}-${tokenPath}` : `--${effectiveNamespace}`;
 				const value = token.$value || token.value;
 				lines.push(`  ${varName}: ${value};`);
 			});
@@ -211,18 +271,21 @@ StyleDictionary.registerFormat({
 // Build Configuration
 // =============================================================================
 
-const sd = new StyleDictionary({
+const sharedTransforms = [
+	'attribute/cti',
+	'name/kebab',
+	'color/oklch-to-hex',
+	'shadow/css',
+	'cubicBezier/css',
+	'fontFamily/css',
+];
+
+// Dark mode (default) — :root / @theme
+const sdDark = new StyleDictionary({
 	source: ['primitives/**/*.json', 'semantic/colors.dark.json'],
 	platforms: {
 		css: {
-			transforms: [
-				'attribute/cti',
-				'name/kebab',
-				'color/oklch-to-hex',
-				'shadow/css',
-				'cubicBezier/css',
-				'fontFamily/css',
-			],
+			transforms: sharedTransforms,
 			buildPath: 'dist/css/',
 			files: [
 				{
@@ -232,14 +295,7 @@ const sd = new StyleDictionary({
 			],
 		},
 		tailwind: {
-			transforms: [
-				'attribute/cti',
-				'name/kebab',
-				'color/oklch-to-hex',
-				'shadow/css',
-				'cubicBezier/css',
-				'fontFamily/css',
-			],
+			transforms: sharedTransforms,
 			buildPath: 'dist/tailwind/',
 			files: [
 				{
@@ -251,7 +307,35 @@ const sd = new StyleDictionary({
 	},
 });
 
+// Light mode — [data-theme="light"] override
+const sdLight = new StyleDictionary({
+	source: ['primitives/**/*.json', 'semantic/colors.light.json'],
+	platforms: {
+		css: {
+			transforms: sharedTransforms,
+			buildPath: 'dist/css/',
+			files: [
+				{
+					destination: 'variables.light.css',
+					format: 'css/variables-light',
+				},
+			],
+		},
+		tailwind: {
+			transforms: sharedTransforms,
+			buildPath: 'dist/tailwind/',
+			files: [
+				{
+					destination: 'theme.light.css',
+					format: 'css/tailwind-theme',
+				},
+			],
+		},
+	},
+});
+
 // Build all platforms
 console.log('Building design tokens...');
-await sd.buildAllPlatforms();
+await sdDark.buildAllPlatforms();
+await sdLight.buildAllPlatforms();
 console.log('Done! Output in dist/');

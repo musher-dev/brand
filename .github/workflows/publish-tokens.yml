@@ -20,7 +20,7 @@ jobs:
       tag: ${{ steps.check.outputs.tag }}
     steps:
       - name: Check for design-tokens release tag
-        uses: actions/github-script@v8
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
         id: check
         with:
           script: |
@@ -67,19 +67,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           ref: ${{ needs.check-release.outputs.tag }}
 
       - name: Setup Node.js 22
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: '22'
           registry-url: 'https://npm.pkg.github.com'
           scope: '@musher-dev'
 
       - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
+        uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2
 
       - name: Install dependencies
         run: bun install --frozen-lockfile
@@ -92,7 +92,9 @@ jobs:
       - name: Verify build output
         run: |
           test -f dist/css/variables.css || { echo "Missing dist/css/variables.css"; exit 1; }
+          test -f dist/css/variables.light.css || { echo "Missing dist/css/variables.light.css"; exit 1; }
           test -f dist/tailwind/theme.css || { echo "Missing dist/tailwind/theme.css"; exit 1; }
+          test -f dist/tailwind/theme.light.css || { echo "Missing dist/tailwind/theme.light.css"; exit 1; }
           echo "Build output verified"
         working-directory: tokens
 

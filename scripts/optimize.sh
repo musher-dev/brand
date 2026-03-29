@@ -3,7 +3,7 @@
 # optimize.sh - Optimize SVGs and PNGs in src/
 #
 # Runs svgo on all SVG files and sharp-cli on all PNG files.
-# This is a non-destructive operation (overwrites in-place in src/).
+# Overwrites in-place in src/ (skips masters/ to preserve editable source art).
 # =============================================================================
 
 set -euo pipefail
@@ -30,7 +30,7 @@ optimize_svgs() {
   while IFS= read -r -d '' file; do
     svgo --quiet "$file"
     count=$((count + 1))
-  done < <(find "$SRC_DIR" -name "*.svg" -print0 2>/dev/null)
+  done < <(find "$SRC_DIR" -not -path '*/masters/*' -name "*.svg" -print0 2>/dev/null)
 
   log "Optimized $count SVG file(s)"
 }
@@ -42,7 +42,7 @@ optimize_pngs() {
     local tmp="${file}.tmp.png"
     sharp --input "$file" --output "$tmp" -- png --compressionLevel 9 2>/dev/null && mv "$tmp" "$file"
     count=$((count + 1))
-  done < <(find "$SRC_DIR" -name "*.png" -print0 2>/dev/null)
+  done < <(find "$SRC_DIR" -not -path '*/masters/*' -name "*.png" -print0 2>/dev/null)
 
   log "Optimized $count PNG file(s)"
 }

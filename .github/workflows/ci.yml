@@ -1,0 +1,59 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  tokens-build:
+    name: Build tokens
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+        working-directory: tokens
+
+      - name: Build tokens
+        run: bun run build
+        working-directory: tokens
+
+      - name: Verify build output
+        run: |
+          test -f dist/css/variables.css || { echo "Missing dist/css/variables.css"; exit 1; }
+          test -f dist/css/variables.light.css || { echo "Missing dist/css/variables.light.css"; exit 1; }
+          test -f dist/tailwind/theme.css || { echo "Missing dist/tailwind/theme.css"; exit 1; }
+          test -f dist/tailwind/theme.light.css || { echo "Missing dist/tailwind/theme.light.css"; exit 1; }
+          echo "Build output verified"
+        working-directory: tokens
+
+  validate-assets:
+    name: Validate assets
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+      - name: Validate
+        run: bash scripts/validate.sh
+
+  shellcheck:
+    name: Lint shell scripts
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+      - name: ShellCheck
+        run: shellcheck scripts/*.sh

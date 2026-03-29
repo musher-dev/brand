@@ -15,6 +15,14 @@
     "primitives/",
     "semantic/"
   ],
+  "exports": {
+    "./dist/css/variables.css": "./dist/css/variables.css",
+    "./dist/css/variables.light.css": "./dist/css/variables.light.css",
+    "./dist/tailwind/theme.css": "./dist/tailwind/theme.css",
+    "./dist/tailwind/theme.light.css": "./dist/tailwind/theme.light.css",
+    "./primitives/*": "./primitives/*",
+    "./semantic/*": "./semantic/*"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/musher-dev/brand.git",
