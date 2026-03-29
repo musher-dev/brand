@@ -47,6 +47,37 @@ jobs:
       - name: Validate
         run: bash scripts/validate.sh
 
+  export-freshness:
+    name: Verify dist/ matches fresh export
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+
+      - name: Install asset tools
+        run: npm ci
+
+      - name: Install Task
+        uses: arduino/setup-task@b91d5d2c96a56797b48ac1e0e89220bf64044611 # v2
+        with:
+          version: '3.x'
+
+      - name: Run export
+        run: task export
+
+      - name: Check for drift
+        run: |
+          if ! git diff --exit-code dist/; then
+            echo "::error::dist/ is out of date. Run 'task export' locally and commit the result."
+            exit 1
+          fi
+
   shellcheck:
     name: Lint shell scripts
     runs-on: ubuntu-latest

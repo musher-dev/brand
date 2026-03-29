@@ -16,10 +16,10 @@ log() {
   echo "[optimize] $*"
 }
 
-# Check dependencies
+# Check dependencies (installed via root package.json)
 for cmd in svgo sharp; do
-  if ! command -v "$cmd" &>/dev/null; then
-    echo "Error: $cmd is not installed. Run: npm install -g svgo sharp-cli" >&2
+  if ! npx --no-install "$cmd" --version &>/dev/null; then
+    echo "Error: $cmd is not installed. Run: npm install" >&2
     exit 1
   fi
 done
@@ -28,7 +28,7 @@ done
 optimize_svgs() {
   local count=0
   while IFS= read -r -d '' file; do
-    svgo --quiet "$file"
+    npx svgo --quiet "$file"
     count=$((count + 1))
   done < <(find "$SRC_DIR" -not -path '*/masters/*' -name "*.svg" -print0 2>/dev/null)
 
@@ -40,7 +40,7 @@ optimize_pngs() {
   local count=0
   while IFS= read -r -d '' file; do
     local tmp="${file}.tmp.png"
-    sharp --input "$file" --output "$tmp" -- png --compressionLevel 9 2>/dev/null && mv "$tmp" "$file"
+    npx sharp --input "$file" --output "$tmp" -- png --compressionLevel 9 2>/dev/null && mv "$tmp" "$file"
     count=$((count + 1))
   done < <(find "$SRC_DIR" -not -path '*/masters/*' -name "*.png" -print0 2>/dev/null)
 

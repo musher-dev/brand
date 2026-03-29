@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "devDependencies": {
+    "sharp-cli": "^4.0.0",
+    "svgo": "^3.0.0"
+  }
+}
