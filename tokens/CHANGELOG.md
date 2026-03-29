@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.1](https://github.com/musher-dev/brand/compare/design-tokens-v2.4.0...design-tokens-v2.4.1) (2026-03-29)
+
+
+### Bug Fixes
+
+* **brand:** resolve repo consistency issues from audit ([#21](https://github.com/musher-dev/brand/issues/21)) ([6be4576](https://github.com/musher-dev/brand/commit/6be4576490d63e131ec72ac56334f2cf40f2f392))
+
 ## [2.4.0](https://github.com/musher-dev/brand/compare/design-tokens-v2.3.0...design-tokens-v2.4.0) (2026-03-10)
 
 
