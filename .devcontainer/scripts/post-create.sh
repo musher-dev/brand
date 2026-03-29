@@ -89,12 +89,12 @@ install_task() {
   log "Task installed: $(task --version)"
 }
 
-# Install asset optimization tools
+# Install asset optimization tools (repo-local via root package.json)
 install_asset_tools() {
   log "Installing asset optimization tools (svgo, sharp-cli)..."
 
-  npm install -g svgo sharp-cli || {
-    log "WARNING: Failed to install svgo/sharp-cli globally"
+  npm install || {
+    log "WARNING: Failed to install asset tools from root package.json"
     return 1
   }
 
@@ -135,7 +135,7 @@ install_token_deps() {
 # Verify tools
 verify_tools() {
   log "Verifying installed tools..."
-  local tools=(task node npm bun svgo sharp git-lfs claude gh)
+  local tools=(task node npm bun git-lfs claude gh)
 
   for cmd in "${tools[@]}"; do
     if command_exists "$cmd"; then

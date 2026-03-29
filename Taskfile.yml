@@ -23,10 +23,10 @@ tasks:
   setup:tools:
     desc: Install asset pipeline tools (svgo, sharp-cli)
     cmds:
-      - npm install -g svgo sharp-cli
+      - npm install
     status:
-      - command -v svgo
-      - command -v sharp
+      - test -d node_modules/svgo
+      - test -d node_modules/sharp-cli
 
   # ===========================================================================
   # Build

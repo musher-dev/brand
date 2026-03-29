@@ -137,11 +137,23 @@ validate_structure() {
   local expected_dirs=(
     "logo/svg"
     "logo/png"
+    "logo/hub/svg"
+    "logo/hub/png"
     "icon/favicon"
+    "icon/hub/favicon"
     "social/avatar"
     "social/og"
     "social/discord"
     "social/github"
+    "social/banner/x"
+    "social/banner/linkedin"
+    "social/banner/youtube"
+    "social/banner/instagram"
+    "background/gradient"
+    "background/hero"
+    "background/pattern"
+    "illustration/svg"
+    "illustration/png"
   )
 
   for dir in "${expected_dirs[@]}"; do

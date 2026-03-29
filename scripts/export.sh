@@ -17,12 +17,6 @@ log() {
   echo "[export] $*"
 }
 
-# Check dependencies
-if ! command -v sharp &>/dev/null; then
-  echo "Error: sharp is not installed. Run: npm install -g sharp-cli" >&2
-  exit 1
-fi
-
 # Clean dist directories (preserves directory structure, removes stale files)
 clean_dist() {
   log "Cleaning dist directories..."
@@ -131,21 +125,17 @@ export_social() {
     fi
   done
 
-  # Export banners (source is flat, dist is per-platform)
-  local banner_src="$SRC_DIR/social/banner"
-  if [ -d "$banner_src" ]; then
-    while IFS= read -r -d '' file; do
-      local name
-      name=$(basename "$file")
-      # Copy to all platform dirs - users should organize by platform
-      for platform in x linkedin youtube instagram; do
-        if [[ "$name" == *"$platform"* ]]; then
-          cp "$file" "$DIST_DIR/social/banner/$platform/"
-          count=$((count + 1))
-        fi
-      done
-    done < <(find "$banner_src" -maxdepth 1 -type f -print0 2>/dev/null)
-  fi
+  # Export banners (source is per-platform subdirectory)
+  for platform in x linkedin youtube instagram; do
+    local banner_platform_src="$SRC_DIR/social/banner/$platform"
+    local banner_platform_dst="$DIST_DIR/social/banner/$platform"
+    if [ -d "$banner_platform_src" ]; then
+      while IFS= read -r -d '' file; do
+        cp "$file" "$banner_platform_dst/"
+        count=$((count + 1))
+      done < <(find "$banner_platform_src" -maxdepth 1 -type f -print0 2>/dev/null)
+    fi
+  done
 
   log "Exported $count social asset(s)"
 }
