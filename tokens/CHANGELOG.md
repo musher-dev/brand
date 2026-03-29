@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.2](https://github.com/musher-dev/brand/compare/design-tokens-v2.4.1...design-tokens-v2.4.2) (2026-03-29)
+
+
+### Bug Fixes
+
+* **tokens:** upgrade build toolchain (style-dictionary v5, svgo v4) ([#29](https://github.com/musher-dev/brand/issues/29)) ([ea6e0f9](https://github.com/musher-dev/brand/commit/ea6e0f9810a4a08fed391e75d9ae83526b86b3d2))
+
 ## [2.4.1](https://github.com/musher-dev/brand/compare/design-tokens-v2.4.0...design-tokens-v2.4.1) (2026-03-29)
 
 
