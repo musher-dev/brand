@@ -2,7 +2,7 @@
 # =============================================================================
 # export.sh - Export optimized assets from src/ to dist/
 #
-# Copies SVGs to dist/logo/svg/, generates PNG rasters at standard sizes,
+# Copies SVGs to dist/logo/svg/, copies pre-rendered PNGs,
 # and copies social/icon assets with the musher naming convention.
 # =============================================================================
 
@@ -18,15 +18,16 @@ log() {
 }
 
 # Check dependencies
-for cmd in sharp; do
-  if ! command -v "$cmd" &>/dev/null; then
-    echo "Error: $cmd is not installed. Run: npm install -g sharp-cli" >&2
-    exit 1
-  fi
-done
+if ! command -v sharp &>/dev/null; then
+  echo "Error: sharp is not installed. Run: npm install -g sharp-cli" >&2
+  exit 1
+fi
 
-# Standard raster sizes for logo PNGs
-LOGO_SIZES=(64 128 256 512 1024)
+# Clean dist directories (preserves directory structure, removes stale files)
+clean_dist() {
+  log "Cleaning dist directories..."
+  find "$DIST_DIR" -type f -not -name '.gitkeep' -delete
+}
 
 # Export logo SVGs
 # Copies outlined/plain SVGs to dist. Skips *-text.svg (editable, not portable).
@@ -70,7 +71,6 @@ export_logo_svgs() {
 
 # Export logo PNGs
 # Copies pre-rendered PNGs from src (lockups have non-square aspect ratios).
-# Falls back to generating from SVGs for marks at standard square sizes.
 export_logo_pngs() {
   local count=0
   local png_dir="$DIST_DIR/logo/png"
@@ -119,7 +119,7 @@ export_icons() {
 # Export social assets
 export_social() {
   local count=0
-  for subdir in avatar og; do
+  for subdir in avatar og discord github; do
     local src_path="$SRC_DIR/social/$subdir"
     local dst_path="$DIST_DIR/social/$subdir"
 
@@ -286,6 +286,7 @@ export_hub_icons() {
 }
 
 log "Exporting assets from $SRC_DIR to $DIST_DIR..."
+clean_dist
 export_logo_svgs
 export_logo_pngs
 export_illustrations

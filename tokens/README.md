@@ -171,6 +171,8 @@ Future: Import generated tokens:
 ```css
 @import 'tailwindcss';
 @import '@musher-dev/design-tokens/dist/tailwind/theme.css';
+/* Optional: light mode support */
+@import '@musher-dev/design-tokens/dist/tailwind/theme.light.css';
 ```
 
 ### Docs (Tailwind v4 + CSS)
@@ -178,6 +180,8 @@ Future: Import generated tokens:
 Future integration via CSS variables:
 ```css
 @import '@musher-dev/design-tokens/dist/css/variables.css';
+/* Optional: light mode support */
+@import '@musher-dev/design-tokens/dist/css/variables.light.css';
 ```
 
 #### Body text tokens at a glance
@@ -258,20 +262,16 @@ In GitHub Actions, GitHub Packages authentication is automatic via `GITHUB_TOKEN
 
 Tokens are built using Style Dictionary v4. The build generates:
 
-- `dist/css/variables.css` - Standard CSS custom properties
-- `dist/tailwind/theme.css` - Tailwind v4 `@theme` compatible output
+- `dist/css/variables.css` - CSS custom properties (dark mode, `:root`)
+- `dist/css/variables.light.css` - CSS custom properties (light mode, `[data-theme="light"]`)
+- `dist/tailwind/theme.css` - Tailwind v4 `@theme` (dark mode)
+- `dist/tailwind/theme.light.css` - Tailwind v4 `@theme` (light mode)
 
 ### Building Tokens
 
 ```bash
 task build         # Build tokens
 task clean         # Clean build output
-```
-
-Or with npm directly:
-```bash
-npm install
-npm run build
 ```
 
 ### Migration Status

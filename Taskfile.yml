@@ -17,7 +17,16 @@ tasks:
   setup:
     desc: Install all dependencies
     cmds:
+      - task: setup:tools
       - task: tokens:setup
+
+  setup:tools:
+    desc: Install asset pipeline tools (svgo, sharp-cli)
+    cmds:
+      - npm install -g svgo sharp-cli
+    status:
+      - command -v svgo
+      - command -v sharp
 
   # ===========================================================================
   # Build

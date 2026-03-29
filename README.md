@@ -4,6 +4,8 @@ Brand assets and design tokens for the [Musher](https://musher.dev) platform.
 
 ## Quick Start
 
+The devcontainer provides all tools automatically. Outside the devcontainer, ensure you have [Task](https://taskfile.dev), Node.js 22+, and [Bun](https://bun.sh) installed.
+
 ```bash
 task setup && task build
 ```
@@ -85,8 +87,10 @@ The token system lives in `tokens/` and is published as [`@musher-dev/design-tok
 task build
 
 # Output
-tokens/dist/css/variables.css        # CSS custom properties
-tokens/dist/tailwind/theme.css       # Tailwind v4 @theme format
+tokens/dist/css/variables.css            # CSS custom properties (dark)
+tokens/dist/css/variables.light.css      # CSS custom properties (light)
+tokens/dist/tailwind/theme.css           # Tailwind v4 @theme (dark)
+tokens/dist/tailwind/theme.light.css     # Tailwind v4 @theme (light)
 ```
 
 See [tokens/README.md](tokens/README.md) for architecture, color system, and usage.
@@ -95,7 +99,7 @@ See [tokens/README.md](tokens/README.md) for architecture, color system, and usa
 
 | Command | Description |
 |---------|-------------|
-| `task setup` | Install token dependencies |
+| `task setup` | Install all dependencies (tokens + asset pipeline tools) |
 | `task build` | Build design tokens |
 | `task optimize` | Optimize SVGs and PNGs in `src/` |
 | `task export` | Export optimized assets from `src/` to `dist/` |

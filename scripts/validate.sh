@@ -3,8 +3,10 @@
 # validate.sh - Validate naming conventions and expected files in dist/
 #
 # Checks:
-# 1. Files in dist/ follow the musher-{asset}-{variant}-{color}-{size}.{ext} pattern
-# 2. Expected favicon files exist (when dist/icon/favicon/ has content)
+# 1. Files in dist/ follow the musher-{asset}-{variant}... naming pattern
+# 2. Naming segments are valid (at least category + variant after musher- prefix)
+# 3. Expected favicon files exist (when dist/icon/favicon/ has content)
+# 4. Expected dist/ directories contain files
 # =============================================================================
 
 set -euo pipefail
@@ -36,8 +38,8 @@ validate_naming() {
     local name
     name=$(basename "$file")
 
-    # Skip .gitkeep, .md, and .css files (e.g. gradients.css)
-    if [ "$name" = ".gitkeep" ] || [[ "$name" == *.md ]] || [[ "$name" == *.css ]]; then
+    # Skip non-asset files (.gitkeep, .md, .css, .xml, .webmanifest)
+    if [ "$name" = ".gitkeep" ] || [[ "$name" == *.md ]] || [[ "$name" == *.css ]] || [[ "$name" == *.xml ]] || [[ "$name" == *.webmanifest ]]; then
       skipped=$((skipped + 1))
       continue
     fi
@@ -47,6 +49,9 @@ validate_naming() {
     # All dist files should start with "musher-"
     if [[ ! "$name" =~ ^musher- ]]; then
       err "Naming violation: $file (expected musher-* prefix)"
+    # Validate naming segments: musher-{category}-{variant}[-{modifier}...]
+    elif [[ ! "$name" =~ ^musher-[a-z]+-[a-z0-9] ]]; then
+      err "Naming violation: $file (expected musher-{category}-{variant} segments)"
     fi
   done < <(find "$DIST_DIR" -type f -print0 2>/dev/null)
 
@@ -125,8 +130,37 @@ validate_hub_favicons() {
   done
 }
 
+# Validate expected dist/ directories are non-empty
+validate_structure() {
+  log "Checking directory structure..."
+
+  local expected_dirs=(
+    "logo/svg"
+    "logo/png"
+    "icon/favicon"
+    "social/avatar"
+    "social/og"
+    "social/discord"
+    "social/github"
+  )
+
+  for dir in "${expected_dirs[@]}"; do
+    local full_path="$DIST_DIR/$dir"
+    if [ ! -d "$full_path" ]; then
+      err "Missing expected directory: dist/$dir"
+    else
+      local file_count
+      file_count=$(find "$full_path" -type f ! -name ".gitkeep" 2>/dev/null | wc -l)
+      if [ "$file_count" -eq 0 ]; then
+        err "Empty directory: dist/$dir (expected exported assets)"
+      fi
+    fi
+  done
+}
+
 log "Validating dist/ in $ROOT_DIR..."
 validate_naming
+validate_structure
 validate_favicons
 validate_hub_favicons
 
