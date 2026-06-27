@@ -1,0 +1,30 @@
+{
+  "name": "@musher-dev/brand-assets",
+  "version": "2.4.2",
+  "description": "Musher brand assets - logos, icons, illustrations, social, and backgrounds",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "optimize": "bash scripts/optimize.sh",
+    "export": "bash scripts/export.sh",
+    "validate": "bash scripts/validate.sh",
+    "build": "echo 'brand-assets: dist/ is committed; run `bun run export` to regenerate'",
+    "check": "bash scripts/validate.sh",
+    "lint": "echo 'brand-assets: no lint'",
+    "publint": "echo 'brand-assets: not published to npm'",
+    "clean": "echo 'brand-assets: nothing to clean'"
+  },
+  "files": [
+    "dist/"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/musher-dev/brand.git",
+    "directory": "packages/brand-assets"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "sharp-cli": "^5.2.0",
+    "svgo": "^4.0.1"
+  }
+}

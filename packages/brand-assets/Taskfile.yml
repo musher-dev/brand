@@ -1,0 +1,25 @@
+# Brand Assets Taskfile
+# Usage: task assets:<task> (from repo root) or task <task> (from this dir)
+
+version: '3'
+
+tasks:
+  optimize:
+    desc: Optimize SVGs and PNGs in src/
+    cmds:
+      - bash scripts/optimize.sh
+
+  export:
+    desc: Export optimized assets from src/ to dist/
+    cmds:
+      - bash scripts/export.sh
+
+  build:
+    desc: Build (export) brand assets
+    cmds:
+      - bash scripts/export.sh
+
+  validate:
+    desc: Validate naming conventions and expected files in dist/
+    cmds:
+      - bash scripts/validate.sh
