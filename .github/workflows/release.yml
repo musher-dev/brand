@@ -1,0 +1,102 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+  pull-requests: write
+  packages: write
+
+jobs:
+  release-please:
+    name: Release PR / tags
+    runs-on: ubuntu-latest
+    outputs:
+      tokens_released: ${{ steps.release.outputs['packages/design-tokens--release_created'] }}
+      tokens_tag: ${{ steps.release.outputs['packages/design-tokens--tag_name'] }}
+      ui_released: ${{ steps.release.outputs['packages/svelte-ui--release_created'] }}
+      ui_tag: ${{ steps.release.outputs['packages/svelte-ui--tag_name'] }}
+    steps:
+      - uses: googleapis/release-please-action@16a9c90856f42705d54a6fda1823352bdc62cf38 # v4
+        id: release
+        with:
+          config-file: config/release/release-please-config.json
+          manifest-file: config/release/.release-please-manifest.json
+
+  publish-design-tokens:
+    name: Publish @musher-dev/design-tokens
+    needs: release-please
+    if: needs.release-please.outputs.tokens_released == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout release tag
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          ref: ${{ needs.release-please.outputs.tokens_tag }}
+
+      - name: Setup Node.js (GitHub Packages registry)
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
+        with:
+          node-version: '22'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@musher-dev'
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2
+
+      - name: Install workspace
+        run: bun install --frozen-lockfile
+
+      - name: Build tokens
+        run: bun run --filter '@musher-dev/design-tokens' build
+
+      - name: Publish to GitHub Packages
+        run: npm publish
+        working-directory: packages/design-tokens
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  publish-svelte-ui:
+    name: Publish @musher-dev/svelte-ui
+    needs: release-please
+    if: needs.release-please.outputs.ui_released == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout release tag
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          ref: ${{ needs.release-please.outputs.ui_tag }}
+
+      - name: Setup Node.js (GitHub Packages registry)
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
+        with:
+          node-version: '22'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@musher-dev'
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2
+
+      - name: Install workspace
+        run: bun install --frozen-lockfile
+
+      - name: Build tokens (peer dependency)
+        run: bun run --filter '@musher-dev/design-tokens' build
+
+      - name: Build svelte-ui
+        run: bun run --filter '@musher-dev/svelte-ui' build
+
+      - name: Publish to GitHub Packages
+        run: npm publish
+        working-directory: packages/svelte-ui
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # Note: @musher-dev/brand-assets is private and not published to npm (its dist/
+  # is committed and Git-LFS tracked). release-please still versions, tags, and
+  # changelogs it. If distribution is needed, attach a `git lfs pull`-ed archive
+  # to the GitHub Release here.

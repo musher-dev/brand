@@ -1,7 +1,21 @@
 {
+  "name": "@musher-dev/brand",
   "private": true,
+  "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
+  "engines": {
+    "bun": ">=1.1.0"
+  },
+  "scripts": {
+    "build": "bun run --filter '*' build",
+    "check": "bun run --filter '*' check",
+    "lint": "bun run --filter '*' lint",
+    "publint": "bun run --filter '*' publint",
+    "clean": "bun run --filter '*' clean"
+  },
   "devDependencies": {
-    "sharp-cli": "^5.2.0",
-    "svgo": "^4.0.1"
+    "publint": "^0.3.0"
   }
 }

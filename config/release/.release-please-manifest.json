@@ -1,3 +1,5 @@
 {
-  "tokens": "2.4.2"
+  "packages/design-tokens": "2.4.2",
+  "packages/svelte-ui": "0.0.0",
+  "packages/brand-assets": "2.4.2"
 }
