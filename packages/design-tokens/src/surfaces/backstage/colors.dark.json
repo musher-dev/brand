@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json.schemastore.org/design-tokens",
+  "$description": "Backstage surface override (dark) - slate canvas + amber brand so operators always know they're in the internal tool.",
+  "surface": {
+    "$type": "color",
+    "base": {
+      "$value": "{color.internal.slate-900}",
+      "$description": "Backstage base canvas - slate"
+    },
+    "elevated": {
+      "$value": "{color.internal.slate-800}",
+      "$description": "Backstage elevated surface - slate"
+    }
+  },
+  "brand": {
+    "$type": "color",
+    "primary": {
+      "$value": "{color.internal.amber}",
+      "$description": "Backstage brand - amber"
+    },
+    "primary-hover": {
+      "$value": "{color.internal.amber-hover}",
+      "$description": "Backstage brand hover - amber"
+    }
+  }
+}

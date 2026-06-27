@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json.schemastore.org/design-tokens",
+  "$description": "Backstage surface override (light) - symmetric with dark: cool slate canvas + amber brand.",
+  "surface": {
+    "$type": "color",
+    "base": {
+      "$value": "{color.internal.slate-50}",
+      "$description": "Backstage base canvas (light) - subtle cool tint"
+    },
+    "elevated": {
+      "$value": "{color.internal.slate-100}",
+      "$description": "Backstage elevated surface (light)"
+    }
+  },
+  "brand": {
+    "$type": "color",
+    "primary": {
+      "$value": "{color.internal.amber}",
+      "$description": "Backstage brand - amber"
+    },
+    "primary-hover": {
+      "$value": "{color.internal.amber-hover}",
+      "$description": "Backstage brand hover - amber"
+    }
+  }
+}

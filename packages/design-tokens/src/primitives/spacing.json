@@ -11,9 +11,9 @@
       "$value": "4px",
       "$description": "grid-1 - Minimal spacing, tight elements"
     },
-    "1.5": {
+    "1-5": {
       "$value": "6px",
-      "$description": "Half-grid value for fine-grained control"
+      "$description": "Half-grid value (1.5x) for fine-grained control"
     },
     "2": {
       "$value": "8px",

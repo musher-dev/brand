@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json.schemastore.org/design-tokens",
+  "$description": "Marketing surface override (dark) - full-saturation brand for landing pages. Inherits everything else from base semantics.",
+  "brand": {
+    "$type": "color",
+    "primary": {
+      "$value": "{color.brand.teal.500}",
+      "$description": "Marketing uses full-saturation teal for vivid landing-page CTAs"
+    },
+    "primary-hover": {
+      "$value": "{color.brand.teal.400}",
+      "$description": "Marketing brand hover"
+    }
+  }
+}

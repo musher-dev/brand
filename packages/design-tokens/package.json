@@ -1,0 +1,73 @@
+{
+  "name": "@musher-dev/design-tokens",
+  "version": "2.4.2",
+  "description": "Design tokens for Musher platform - single source of truth for visual design",
+  "type": "module",
+  "sideEffects": [
+    "*.css"
+  ],
+  "types": "./dist/console/ts/tokens.dark.d.ts",
+  "scripts": {
+    "build": "node build/config.js",
+    "check": "node build/config.js && node scripts/validate-tokens.mjs",
+    "lint": "echo 'design-tokens: no lint'",
+    "publint": "publint",
+    "clean": "rm -rf dist"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/console/ts/tokens.dark.d.ts",
+      "import": "./dist/console/ts/tokens.dark.js",
+      "default": "./dist/console/ts/tokens.dark.js"
+    },
+    "./css": "./dist/console/css/variables.dark.css",
+    "./css/light": "./dist/console/css/variables.light.css",
+    "./theme": "./dist/console/tailwind/theme.dark.css",
+    "./theme/light": "./dist/console/tailwind/theme.light.css",
+    "./json": "./dist/console/json/tokens.dark.json",
+    "./json/light": "./dist/console/json/tokens.light.json",
+    "./ts": {
+      "types": "./dist/console/ts/tokens.dark.d.ts",
+      "import": "./dist/console/ts/tokens.dark.js"
+    },
+    "./marketing/css": "./dist/marketing/css/variables.dark.css",
+    "./marketing/css/light": "./dist/marketing/css/variables.light.css",
+    "./marketing/theme": "./dist/marketing/tailwind/theme.dark.css",
+    "./marketing/theme/light": "./dist/marketing/tailwind/theme.light.css",
+    "./marketing/json": "./dist/marketing/json/tokens.dark.json",
+    "./marketing/ts": {
+      "types": "./dist/marketing/ts/tokens.dark.d.ts",
+      "import": "./dist/marketing/ts/tokens.dark.js"
+    },
+    "./backstage/css": "./dist/backstage/css/variables.dark.css",
+    "./backstage/css/light": "./dist/backstage/css/variables.light.css",
+    "./backstage/css/bui": "./dist/backstage/css/bui.dark.css",
+    "./backstage/css/bui/light": "./dist/backstage/css/bui.light.css",
+    "./backstage/theme": "./dist/backstage/tailwind/theme.dark.css",
+    "./backstage/json": "./dist/backstage/json/tokens.dark.json",
+    "./backstage/ts": {
+      "types": "./dist/backstage/ts/tokens.dark.d.ts",
+      "import": "./dist/backstage/ts/tokens.dark.js"
+    },
+    "./src/*": "./src/*",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist/",
+    "src/"
+  ],
+  "devDependencies": {
+    "culori": "^4",
+    "publint": "^0.3",
+    "style-dictionary": "^5.4.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/musher-dev/brand.git",
+    "directory": "packages/design-tokens"
+  },
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  }
+}

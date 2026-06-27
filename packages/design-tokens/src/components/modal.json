@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json.schemastore.org/design-tokens",
+  "$description": "Tier 3 component tokens for Modal. References semantic + primitive scale tokens only.",
+  "modal": {
+    "overlay": {
+      "bg": { "$type": "color", "$value": "{surface.base}", "$description": "Backdrop scrim color (apply opacity in component CSS)" }
+    },
+    "surface": {
+      "bg": { "$type": "color", "$value": "{surface.elevated}", "$description": "Modal panel background" },
+      "border": { "$type": "color", "$value": "{border.default}", "$description": "Modal panel border" }
+    }
+  }
+}

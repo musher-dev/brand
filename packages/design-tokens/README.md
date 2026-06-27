@@ -34,8 +34,8 @@ Three-tier token hierarchy following W3C DTCG 2025.10 format:
 |  |  Purpose-driven aliases that reference primitives      | |
 |  |  Example: surface.base = "{color.neutral.5}"           | |
 |  |  +---------------------------------------------------+ | |
-|  |  | COMPONENT (Tier 3) - Future                       | | |
-|  |  |  Component-specific tokens                        | | |
+|  |  | COMPONENT (Tier 3)                                | | |
+|  |  |  Component-specific tokens (semantic refs only)   | | |
 |  |  |  Example: button.primary.bg = "{interactive.primary}"| |
 |  |  +---------------------------------------------------+ | |
 |  +--------------------------------------------------------+ |
@@ -45,20 +45,38 @@ Three-tier token hierarchy following W3C DTCG 2025.10 format:
 ## Directory Structure
 
 ```
-tokens/
+packages/design-tokens/
 ├── README.md              # This file
-├── primitives/            # Tier 1: Raw values
-│   ├── colors.json        # Oklch color palette
-│   ├── typography.json    # Font families, sizes, weights
-│   ├── spacing.json       # 4px/8px grid scale
-│   ├── radii.json         # Border radius values
-│   ├── shadows.json       # Box shadow definitions
-│   └── motion.json        # Animation durations, easings
-├── semantic/              # Tier 2: Purpose-driven aliases
-│   ├── colors.dark.json   # DEFAULT - dark mode semantics
-│   └── colors.light.json  # OVERRIDE - light mode semantics
-└── component/             # Tier 3: Future expansion
+├── build/
+│   └── config.js          # Style Dictionary matrix build (surfaces x modes)
+├── scripts/
+│   └── validate-tokens.mjs # Dark/light override symmetry gate
+├── src/
+│   ├── primitives/        # Tier 1: Raw values
+│   │   ├── colors.json    # Oklch color palette
+│   │   ├── typography.json
+│   │   ├── spacing.json
+│   │   ├── radii.json
+│   │   ├── shadows.json
+│   │   └── motion.json
+│   ├── semantic/          # Tier 2: Purpose-driven aliases (console baseline)
+│   │   ├── colors.dark.json   # DEFAULT - dark mode semantics
+│   │   └── colors.light.json  # OVERRIDE - light mode semantics
+│   ├── surfaces/          # Per-surface theme overrides (sparse DTCG)
+│   │   ├── console/       # Canonical baseline - no overrides
+│   │   ├── marketing/     # Vivid full-saturation brand for landing pages
+│   │   └── backstage/     # Distinct slate + amber internal-tool theme
+│   └── components/        # Tier 3: Component tokens (button, modal, input)
+└── dist/                  # Generated (gitignored): <surface>/{css,tailwind,ts,json}/
 ```
+
+### Surfaces
+
+All consuming apps share the same primitives and base semantic language; a
+**surface** is a small override layer for visual distinction. Override files are
+sparse — they list only the tokens that differ from the baseline and inherit the
+rest. `console` is the baseline (no overrides). Backstage additionally emits
+`--bui-*`-prefixed CSS for the Backstage UI variable convention.
 
 ## Token Format (W3C DTCG 2025.10)
 
@@ -153,35 +171,32 @@ Rules:
 
 ## Usage by Platform
 
-### Console (Tailwind v4)
+The package exposes clean subpath exports. `console` is the default surface;
+`marketing` and `backstage` are available under their own subpaths.
 
-The console uses Tailwind v4 with CSS-first `@theme` configuration. Tokens are defined directly in `src/app.css`:
+| Export | File |
+|--------|------|
+| `@musher-dev/design-tokens/css` | console CSS variables (dark, `:root`) |
+| `@musher-dev/design-tokens/css/light` | console light override (`[data-theme="light"]`) |
+| `@musher-dev/design-tokens/theme` | console Tailwind v4 `@theme` |
+| `@musher-dev/design-tokens/json` | console flat JSON (oklch + hex) |
+| `@musher-dev/design-tokens` / `…/ts` | console typed TS constants |
+| `@musher-dev/design-tokens/marketing/css` | marketing CSS variables |
+| `@musher-dev/design-tokens/backstage/css` | backstage CSS variables |
+| `@musher-dev/design-tokens/backstage/css/bui` | backstage `--bui-*` variables |
+
+### Console / Docs (Tailwind v4)
 
 ```css
 @import 'tailwindcss';
-
-@theme {
-  --color-surface-base: #161616;
-  --color-surface-elevated: #262626;
-  /* ... */
-}
+@import '@musher-dev/design-tokens/theme';
 ```
 
-Future: Import generated tokens:
-```css
-@import 'tailwindcss';
-@import '@musher-dev/design-tokens/dist/tailwind/theme.css';
-/* Optional: light mode support */
-@import '@musher-dev/design-tokens/dist/tailwind/theme.light.css';
-```
+### Any framework (CSS variables)
 
-### Docs (Tailwind v4 + CSS)
-
-Future integration via CSS variables:
 ```css
-@import '@musher-dev/design-tokens/dist/css/variables.css';
-/* Optional: light mode support */
-@import '@musher-dev/design-tokens/dist/css/variables.light.css';
+@import '@musher-dev/design-tokens/css';
+@import '@musher-dev/design-tokens/css/light'; /* optional light mode */
 ```
 
 #### Body text tokens at a glance
@@ -229,18 +244,24 @@ npm install @musher-dev/design-tokens
 **Tailwind v4** (Console, Docs):
 ```css
 @import 'tailwindcss';
-@import '@musher-dev/design-tokens/dist/tailwind/theme.css';
+@import '@musher-dev/design-tokens/theme';
 ```
 
 **CSS custom properties** (any framework):
 ```css
-@import '@musher-dev/design-tokens/dist/css/variables.css';
+@import '@musher-dev/design-tokens/css';
 ```
 
-**Raw JSON** (scripts, tooling):
+**Typed constants** (scripts, JS/TS logic — colors carry `oklch` + `hex`):
+```ts
+import { tokens } from '@musher-dev/design-tokens';
+tokens.surface.base.oklch; // "oklch(14% 0.005 285)"
+tokens.surface.base.hex;   // "#09090b"
+```
+
+**Raw DTCG source** (tooling, design-tool sync):
 ```js
-import primitives from '@musher-dev/design-tokens/primitives/colors.json';
-import semantic from '@musher-dev/design-tokens/semantic/colors.dark.json';
+import colors from '@musher-dev/design-tokens/src/primitives/colors.json' with { type: 'json' };
 ```
 
 ### CI/CD
@@ -260,31 +281,26 @@ In GitHub Actions, GitHub Packages authentication is automatic via `GITHUB_TOKEN
 
 ## Build System
 
-Tokens are built using Style Dictionary v4. The build generates:
+Tokens are built with Style Dictionary v5 via a matrix build (`build/config.js`)
+that iterates every surface × mode. For each combination it generates:
 
-- `dist/css/variables.css` - CSS custom properties (dark mode, `:root`)
-- `dist/css/variables.light.css` - CSS custom properties (light mode, `[data-theme="light"]`)
-- `dist/tailwind/theme.css` - Tailwind v4 `@theme` (dark mode)
-- `dist/tailwind/theme.light.css` - Tailwind v4 `@theme` (light mode)
+- `dist/<surface>/css/variables.<mode>.css` - CSS custom properties (native oklch)
+- `dist/<surface>/tailwind/theme.<mode>.css` - Tailwind v4 `@theme`
+- `dist/<surface>/ts/tokens.<mode>.{js,d.ts}` - typed constants (oklch + hex)
+- `dist/<surface>/json/tokens.<mode>.json` - flat resolved JSON (oklch + hex)
+- `dist/backstage/css/bui.<mode>.css` - Backstage `--bui-*` variables
+
+Colors stay **native oklch** in CSS/Tailwind (perceptual uniformity, modern
+browser support); accurate hex is computed via `culori` only for the JSON/TS
+consumers that need a plain scalar.
 
 ### Building Tokens
 
 ```bash
-task build         # Build tokens
-task clean         # Clean build output
+bun run build      # Build all surfaces and modes
+bun run check      # Build + validate dark/light override symmetry
+bun run clean      # Remove dist/
 ```
-
-### Migration Status
-
-- [x] Define primitive tokens (colors, typography, spacing)
-- [x] Define semantic tokens (dark mode default)
-- [x] Define light mode overrides
-- [x] Add build tooling (Style Dictionary 4.0)
-- [x] Generate Tailwind v4 @theme output
-- [x] Upgrade Console to Tailwind v4
-- [ ] Migrate Console components to consume brand tokens
-- [ ] Migrate Docs to use CSS variables
-- [ ] Migrate Marketing to use presets
 
 ## Why Oklch?
 
