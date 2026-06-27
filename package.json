@@ -13,7 +13,9 @@
     "check": "bun run --filter '*' check",
     "lint": "bun run --filter '*' lint",
     "publint": "bun run --filter '*' publint",
-    "clean": "bun run --filter '*' clean"
+    "clean": "bun run --filter '*' clean",
+    "dev:ui": "bun run --filter '@musher-dev/design-tokens' build && bun run --filter '@musher-dev/svelte-ui' dev",
+    "storybook:build": "bun run --filter '@musher-dev/design-tokens' build && bun run --filter '@musher-dev/svelte-ui' build-storybook"
   },
   "devDependencies": {
     "publint": "^0.3.0"

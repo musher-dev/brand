@@ -23,6 +23,16 @@ tasks:
     cmds:
       - bun run --filter '*' build
 
+  ui:dev:
+    desc: Build tokens then run the svelte-ui Storybook (dev)
+    cmds:
+      - bun run dev:ui
+
+  ui:storybook:
+    desc: Build tokens then build the svelte-ui Storybook (static)
+    cmds:
+      - bun run storybook:build
+
   # --- Asset pipeline (delegated to brand-assets) ---
   optimize:
     desc: Optimize SVGs and PNGs in brand-assets/src/

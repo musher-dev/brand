@@ -1,0 +1,47 @@
+name: Chromatic
+
+# Visual regression testing for @musher-dev/svelte-ui via Storybook.
+#
+# Disabled until a Chromatic project is configured. To enable:
+#   1. Add the repository secret CHROMATIC_PROJECT_TOKEN.
+#   2. Set the repository variable CHROMATIC_ENABLED to "true".
+# Until then the job is skipped, keeping CI green.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  chromatic:
+    name: Visual regression (Chromatic)
+    if: ${{ vars.CHROMATIC_ENABLED == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 0 # Chromatic needs full git history for baseline comparison
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2
+
+      - name: Install workspace
+        run: bun install --frozen-lockfile
+
+      - name: Build design tokens (Storybook dependency)
+        run: bun run --filter '@musher-dev/design-tokens' build
+
+      - name: Publish to Chromatic
+        uses: chromaui/action@7ffa9343588f15ff3f4cde30e03cd23204ed6a9c # v17.7.2
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          workingDir: packages/svelte-ui
+          buildScriptName: build-storybook
+          onlyChanged: true # TurboSnap: snapshot only stories affected by the diff
+          exitZeroOnChanges: true # report visual changes without failing the build
