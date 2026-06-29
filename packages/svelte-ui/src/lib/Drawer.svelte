@@ -2,12 +2,13 @@
 	import type { Snippet } from 'svelte';
 	import { focusTrap } from './internal/focus-trap.js';
 
-	type Size = 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '4xl';
+	type Side = 'right' | 'left';
 
 	interface Props {
 		open?: boolean;
 		title?: string;
-		size?: Size;
+		subtitle?: string;
+		side?: Side;
 		class?: string;
 		onClose?: () => void;
 		children?: Snippet;
@@ -18,7 +19,8 @@
 	let {
 		open = $bindable(false),
 		title = '',
-		size = 'md',
+		subtitle = '',
+		side = 'right',
 		class: className = '',
 		onClose,
 		children,
@@ -26,7 +28,7 @@
 		headerActions,
 	}: Props = $props();
 
-	const titleId = `modal-title-${Math.random().toString(36).slice(2, 9)}`;
+	const titleId = `drawer-title-${Math.random().toString(36).slice(2, 9)}`;
 
 	function close() {
 		open = false;
@@ -44,34 +46,28 @@
 	<div class="overlay" role="dialog" aria-modal="true" aria-labelledby={title ? titleId : undefined}>
 		<button type="button" class="overlay__scrim" aria-label="Close" tabindex="-1" onclick={close}></button>
 
-		<div use:focusTrap class="modal modal--{size} {className}" tabindex="-1">
-			{#if title || headerActions}
-				<header class="modal__header">
-					{#if title}<h2 id={titleId} class="modal__title">{title}</h2>{/if}
-					<div class="modal__header-actions">
-						{@render headerActions?.()}
-						<button type="button" class="modal__close" onclick={close} aria-label="Close">
-							<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
-								<path
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									stroke-width="2"
-									d="M6 18 18 6M6 6l12 12"
-								/>
-							</svg>
-						</button>
-					</div>
-				</header>
-			{/if}
+		<div use:focusTrap class="drawer drawer--{side} {className}" tabindex="-1">
+			<header class="drawer__header">
+				<div class="drawer__heading">
+					{#if title}<h2 id={titleId} class="drawer__title">{title}</h2>{/if}
+					{#if subtitle}<p class="drawer__subtitle">{subtitle}</p>{/if}
+				</div>
+				<div class="drawer__header-actions">
+					{@render headerActions?.()}
+					<button type="button" class="drawer__close" onclick={close} aria-label="Close">
+						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 18 6M6 6l12 12" />
+						</svg>
+					</button>
+				</div>
+			</header>
 
-			<div class="modal__content">
+			<div class="drawer__content">
 				{@render children?.()}
 			</div>
 
 			{#if footer}
-				<footer class="modal__footer">
-					{@render footer()}
-				</footer>
+				<footer class="drawer__footer">{@render footer()}</footer>
 			{/if}
 		</div>
 	</div>
@@ -81,81 +77,65 @@
 	.overlay {
 		position: fixed;
 		inset: 0;
-		z-index: var(--z-index-modal);
+		z-index: var(--z-index-drawer);
 		display: flex;
-		align-items: center;
-		justify-content: center;
-		padding: var(--spacing-4);
 	}
-
 	.overlay__scrim {
 		position: fixed;
 		inset: 0;
-		z-index: var(--z-index-overlay);
 		border: none;
 		cursor: default;
 		background-color: var(--modal-overlay-bg);
 		opacity: var(--opacity-scrim);
 	}
 
-	.modal {
+	.drawer {
 		position: relative;
-		z-index: var(--z-index-modal);
+		z-index: var(--z-index-drawer);
 		display: flex;
 		flex-direction: column;
 		width: 100%;
-		max-height: 90vh;
-		overflow: hidden;
-		background-color: var(--modal-surface-bg);
-		border: var(--border-width-thin) solid var(--modal-surface-border);
-		border-radius: var(--radius-card);
+		max-width: var(--container-md);
+		height: 100%;
+		background-color: var(--surface-elevated);
 		box-shadow: var(--shadow-modal);
 	}
-
-	/* Sizes map to container tokens */
-	.modal--sm {
-		max-width: var(--container-sm);
+	.drawer--right {
+		margin-left: auto;
+		border-left: var(--border-width-thin) solid var(--border-subtle);
 	}
-	.modal--md {
-		max-width: var(--container-md);
-	}
-	.modal--lg {
-		max-width: var(--container-lg);
-	}
-	.modal--xl {
-		max-width: var(--container-xl);
-	}
-	.modal--2xl {
-		max-width: var(--container-2xl);
-	}
-	.modal--4xl {
-		max-width: var(--container-4xl);
+	.drawer--left {
+		margin-right: auto;
+		border-right: var(--border-width-thin) solid var(--border-subtle);
 	}
 
-	.modal__header {
+	.drawer__header {
 		display: flex;
-		align-items: center;
+		align-items: flex-start;
 		justify-content: space-between;
 		gap: var(--spacing-3);
 		padding: var(--spacing-4) var(--spacing-6);
-		border-bottom: var(--border-width-thin) solid var(--modal-surface-border);
+		border-bottom: var(--border-width-thin) solid var(--border-subtle);
 	}
-
-	.modal__title {
+	.drawer__title {
 		margin: 0;
 		font-family: var(--font-family-sans);
 		font-size: var(--font-size-heading-sm);
 		font-weight: var(--font-weight-semibold);
 		color: var(--text-primary);
 	}
-
-	.modal__header-actions {
+	.drawer__subtitle {
+		margin: var(--spacing-1) 0 0;
+		font-family: var(--font-family-sans);
+		font-size: var(--font-size-label);
+		color: var(--text-secondary);
+	}
+	.drawer__header-actions {
 		display: flex;
 		align-items: center;
 		gap: var(--spacing-2);
 	}
-
-	.modal__close {
+	.drawer__close {
 		display: inline-flex;
 		padding: var(--spacing-1);
 		border: none;
@@ -163,17 +143,16 @@
 		color: var(--text-secondary);
 		cursor: pointer;
 		border-radius: var(--radius-control);
-		transition: color var(--duration-fast) var(--easing-ease-out);
 	}
-	.modal__close:hover {
+	.drawer__close:hover {
 		color: var(--text-primary);
 	}
-	.modal__close svg {
+	.drawer__close svg {
 		width: var(--size-icon-md);
 		height: var(--size-icon-md);
 	}
 
-	.modal__content {
+	.drawer__content {
 		flex: 1;
 		overflow: auto;
 		padding: var(--spacing-4) var(--spacing-6);
@@ -181,14 +160,13 @@
 		font-size: var(--font-size-body);
 		color: var(--text-primary);
 	}
-
-	.modal__footer {
+	.drawer__footer {
 		display: flex;
 		align-items: center;
 		justify-content: flex-end;
 		gap: var(--spacing-3);
 		padding: var(--spacing-4) var(--spacing-6);
-		border-top: var(--border-width-thin) solid var(--modal-surface-border);
+		border-top: var(--border-width-thin) solid var(--border-subtle);
 		background-color: var(--surface-overlay);
 	}
 </style>

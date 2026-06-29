@@ -8,11 +8,12 @@ variables (enforced by Stylelint — no hardcoded colors or spacing).
 ## Install
 
 ```bash
-bun add @musher-dev/svelte-ui @musher-dev/design-tokens
+bun add @musher-dev/svelte-ui @musher-dev/design-tokens bits-ui
 ```
 
-`@musher-dev/design-tokens` is a peer dependency. Load its CSS once at your app
-root so the component variables resolve:
+Peer dependencies: `svelte` ^5, `@musher-dev/design-tokens`, and `bits-ui` ^2
+(used by `Tabs` and `Tooltip`). Load the token CSS once at your app root so the
+component variables resolve:
 
 ```svelte
 <!-- +layout.svelte -->
@@ -22,20 +23,48 @@ root so the component variables resolve:
 </script>
 ```
 
+## Components
+
+| Group | Components |
+|-------|------------|
+| Actions | `Button` (variant · size · loading · href) |
+| Display | `Card`, `Badge`, `Alert`, `Spinner`, `EmptyState` |
+| Forms | `Input` (label · hint · error · password toggle), `Textarea`, `Select`, `Checkbox` |
+| Overlays | `Modal`, `Drawer`, `Tooltip` |
+| Navigation | `Tabs`, `SegmentedControl` |
+| Feedback | `Toaster` + the `toast` store/API |
+
+Plus `cn()` (clsx + tailwind-merge) from `@musher-dev/svelte-ui/utils`.
+
 ## Usage
 
 ```svelte
 <script lang="ts">
-  import { Button, Modal } from '@musher-dev/svelte-ui';
+  import { Button, Modal, toast } from '@musher-dev/svelte-ui';
   let open = $state(false);
 </script>
 
-<Button variant="primary" onclick={() => (open = true)}>Open</Button>
+<Button variant="primary" size="md" onclick={() => (open = true)}>Open</Button>
 
-<Modal {open} onclose={() => (open = false)}>
-  {#snippet header()}Confirm{/snippet}
+<Modal bind:open title="Confirm" size="md" onClose={() => (open = false)}>
   Are you sure?
+  {#snippet footer()}
+    <Button variant="ghost" size="sm" onclick={() => (open = false)}>Cancel</Button>
+    <Button variant="danger" size="sm" onclick={() => toast.success('Done')}>Confirm</Button>
+  {/snippet}
 </Modal>
+```
+
+### Icons are passed in, never bundled
+
+Components never import an icon library. Pass icons via the `icon` snippet so each
+app keeps its own set (`@lucide/svelte`, inline SVG, …):
+
+```svelte
+<Button>
+  {#snippet icon()}<RocketIcon />{/snippet}
+  Deploy
+</Button>
 ```
 
 `Button` variants: `primary` | `secondary` | `ghost` | `danger`.
