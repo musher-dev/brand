@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json.schemastore.org/design-tokens",
+  "$description": "Marketing surface override (light) - keeps the same vivid brand keys as dark for symmetry.",
+  "brand": {
+    "$type": "color",
+    "primary": {
+      "$value": "{color.brand.teal.500}",
+      "$description": "Marketing primary brand (light)"
+    },
+    "primary-hover": {
+      "$value": "{color.brand.teal.600}",
+      "$description": "Marketing brand hover (light) - darker for contrast"
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json.schemastore.org/design-tokens",
+  "$description": "Tier 3 component tokens for Input. References semantic tokens only.",
+  "input": {
+    "$type": "color",
+    "bg": { "$value": "{surface.overlay}", "$description": "Input background" },
+    "fg": { "$value": "{text.primary}", "$description": "Input text" },
+    "placeholder": { "$value": "{text.placeholder}", "$description": "Input placeholder text" },
+    "border": { "$value": "{border.default}", "$description": "Input border" },
+    "border-focus": { "$value": "{border.focus}", "$description": "Input border on focus" }
+  }
+}

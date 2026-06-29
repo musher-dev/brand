@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json.schemastore.org/design-tokens",
+  "$description": "Tier 3 component tokens for Button. References semantic tokens only - never primitives. Surface overrides of semantics flow through automatically.",
+  "button": {
+    "$type": "color",
+    "primary": {
+      "bg": { "$value": "{interactive.primary}", "$description": "Primary button background" },
+      "bg-hover": { "$value": "{interactive.primary-hover}", "$description": "Primary button hover" },
+      "fg": { "$value": "{text.inverse}", "$description": "Primary button label" },
+      "border": { "$value": "{interactive.primary}", "$description": "Primary button border" }
+    },
+    "secondary": {
+      "bg": { "$value": "{interactive.secondary}", "$description": "Secondary button background" },
+      "bg-hover": { "$value": "{interactive.secondary-hover}", "$description": "Secondary button hover" },
+      "fg": { "$value": "{text.primary}", "$description": "Secondary button label" },
+      "border": { "$value": "{border.default}", "$description": "Secondary button border" }
+    },
+    "ghost": {
+      "bg": { "$value": "{interactive.ghost}", "$description": "Ghost button background" },
+      "bg-hover": { "$value": "{interactive.ghost-hover}", "$description": "Ghost button hover" },
+      "fg": { "$value": "{text.primary}", "$description": "Ghost button label" }
+    },
+    "danger": {
+      "bg": { "$value": "{interactive.danger}", "$description": "Danger button background" },
+      "bg-hover": { "$value": "{interactive.danger-hover}", "$description": "Danger button hover" },
+      "fg": { "$value": "{text.inverse}", "$description": "Danger button label" }
+    }
+  }
+}

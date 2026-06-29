@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json.schemastore.org/design-tokens",
+  "breakpoint": {
+    "$type": "dimension",
+    "$description": "Responsive breakpoints (Tailwind v4 --breakpoint-* namespace)",
+    "sm": { "$value": "640px", "$description": "Small - large phones / small tablets" },
+    "md": { "$value": "768px", "$description": "Medium - tablets" },
+    "lg": { "$value": "1024px", "$description": "Large - laptops" },
+    "xl": { "$value": "1280px", "$description": "Extra large - desktops" },
+    "2xl": { "$value": "1536px", "$description": "2XL - wide desktops" }
+  },
+  "container": {
+    "$type": "dimension",
+    "$description": "Container max-widths (Tailwind v4 --container-* namespace)",
+    "sm": { "$value": "24rem", "$description": "384px" },
+    "md": { "$value": "28rem", "$description": "448px" },
+    "lg": { "$value": "32rem", "$description": "512px" },
+    "xl": { "$value": "36rem", "$description": "576px" },
+    "2xl": { "$value": "42rem", "$description": "672px" },
+    "3xl": { "$value": "48rem", "$description": "768px" },
+    "4xl": { "$value": "56rem", "$description": "896px" },
+    "5xl": { "$value": "64rem", "$description": "1024px" },
+    "6xl": { "$value": "72rem", "$description": "1152px" },
+    "7xl": { "$value": "80rem", "$description": "1280px" },
+    "8xl": { "$value": "90rem", "$description": "1440px - wide reading/docs layouts" }
+  }
+}

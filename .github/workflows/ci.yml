@@ -8,10 +8,10 @@ permissions:
   contents: read
 
 jobs:
-  tokens-build:
-    name: Build tokens
+  build-and-check:
+    name: Build & check workspace
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
     steps:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
@@ -19,62 +19,44 @@ jobs:
       - name: Setup Bun
         uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2
 
-      - name: Install dependencies
+      - name: Install workspace
         run: bun install --frozen-lockfile
-        working-directory: tokens
 
-      - name: Build tokens
-        run: bun run build
-        working-directory: tokens
+      - name: Build all packages
+        run: bun run --filter '*' build
 
-      - name: Verify build output
-        run: |
-          test -f dist/css/variables.css || { echo "Missing dist/css/variables.css"; exit 1; }
-          test -f dist/css/variables.light.css || { echo "Missing dist/css/variables.light.css"; exit 1; }
-          test -f dist/tailwind/theme.css || { echo "Missing dist/tailwind/theme.css"; exit 1; }
-          test -f dist/tailwind/theme.light.css || { echo "Missing dist/tailwind/theme.light.css"; exit 1; }
-          echo "Build output verified"
-        working-directory: tokens
+      - name: Typecheck / check
+        run: bun run --filter '*' check
 
-  validate-assets:
-    name: Validate assets
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    steps:
-      - name: Checkout
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - name: Lint
+        run: bun run --filter '*' lint
 
-      - name: Validate
-        run: bash scripts/validate.sh
+      - name: Validate package exports (publint)
+        run: bun run --filter '*' publint
 
   export-freshness:
-    name: Verify dist/ matches fresh export
+    name: Verify brand-assets dist/ matches fresh export
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - name: Checkout
+      - name: Checkout (with LFS)
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-
-      - name: Setup Node
-        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
         with:
-          node-version: '22'
+          lfs: true
 
-      - name: Install asset tools
-        run: npm ci
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2
 
-      - name: Install Task
-        uses: arduino/setup-task@b91d5d2c96a56797b48ac1e0e89220bf64044611 # v2
-        with:
-          version: '3.x'
+      - name: Install workspace
+        run: bun install --frozen-lockfile
 
       - name: Run export
-        run: task export
+        run: bun run --filter '@musher-dev/brand-assets' export
 
       - name: Check for drift
         run: |
-          if ! git diff --exit-code dist/; then
-            echo "::error::dist/ is out of date. Run 'task export' locally and commit the result."
+          if ! git diff --exit-code packages/brand-assets/dist/; then
+            echo "::error::packages/brand-assets/dist/ is out of date. Run 'bun run --filter @musher-dev/brand-assets export' locally and commit the result."
             exit 1
           fi
 
@@ -87,4 +69,4 @@ jobs:
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: ShellCheck
-        run: shellcheck scripts/*.sh
+        run: shellcheck packages/brand-assets/scripts/*.sh

@@ -1,6 +1,6 @@
 # Musher Brand Guidelines
 
-Comprehensive reference for the Musher visual identity. All values are authoritative and sourced from the design token system in `tokens/`.
+Comprehensive reference for the Musher visual identity. All values are authoritative and sourced from the design token system in `packages/design-tokens/`.
 
 ---
 
@@ -8,7 +8,7 @@ Comprehensive reference for the Musher visual identity. All values are authorita
 
 ### Named Brand Colors
 
-These are the canonical brand colors used across logos, marketing, and asset production. Token paths reference `tokens/primitives/colors.json`.
+These are the canonical brand colors used across logos, marketing, and asset production. Token paths reference `packages/design-tokens/src/primitives/colors.json`.
 
 | Name | Hex | Oklch | Token Path | Usage |
 |------|-----|-------|------------|-------|
@@ -310,7 +310,7 @@ Font files are located in `src/fonts/`. See `src/fonts/README.md` for licensing 
 
 ### Type Scale
 
-From `tokens/primitives/typography.json`:
+From `packages/design-tokens/src/primitives/typography.json`:
 
 | Token | Size | Line Height | Usage |
 |-------|------|-------------|-------|

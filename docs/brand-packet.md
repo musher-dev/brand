@@ -237,7 +237,7 @@ Justin Merrell — Founding Engineer then Chief of Staff at RunPod. Creator of [
 
 ### Field 9: Color Tokens
 
-Derived from existing `brand/tokens/primitives/colors.json` and `brand/tokens/semantic/colors.dark.json`. Dark mode first — marketing pages default to dark.
+Derived from existing `packages/design-tokens/src/primitives/colors.json` and `packages/design-tokens/src/semantic/colors.dark.json`. Dark mode first — marketing pages default to dark.
 
 | Token | Hex | OKLCH | Role | Source Token |
 |-------|-----|-------|------|-------------|
@@ -262,11 +262,11 @@ Derived from existing `brand/tokens/primitives/colors.json` and `brand/tokens/se
 - text-primary (#F4F4F4): ~15.3:1 — passes WCAG AAA (7:1)
 - text-secondary (#C6C6C6): ~10.1:1 — passes WCAG AAA (7:1)
 
-**Derivation**: All tokens reference existing `brand/tokens/` primitives. Engineering Teal (`oklch(65% 0.14 195)`) bridges trust (blue hue range) and forward movement (green hue range) at hue 195. Dark mode uses near-black with a slight cool cast (hue 285, chroma 0.005) to avoid pure black harshness.
+**Derivation**: All tokens reference existing `packages/design-tokens/src/` primitives. Engineering Teal (`oklch(65% 0.14 195)`) bridges trust (blue hue range) and forward movement (green hue range) at hue 195. Dark mode uses near-black with a slight cool cast (hue 285, chroma 0.005) to avoid pure black harshness.
 
 ### Field 10: Typography System
 
-Derived from existing `brand/tokens/primitives/typography.json`. Inter for UI/marketing, JetBrains Mono for code — following the developer-focused decision tree path (Inter + JetBrains Mono pairing).
+Derived from existing `packages/design-tokens/src/primitives/typography.json`. Inter for UI/marketing, JetBrains Mono for code — following the developer-focused decision tree path (Inter + JetBrains Mono pairing).
 
 | Role | Family | Size | Line Height | Weight | Tracking |
 |------|--------|------|-------------|--------|----------|
@@ -282,7 +282,7 @@ Derived from existing `brand/tokens/primitives/typography.json`. Inter for UI/ma
 | Code/Mono | JetBrains Mono | 14px | 20px (1.43) | 400 (Regular) | 0 |
 | Code Display | JetBrains Mono | 16px | 24px (1.50) | 400 (Regular) | 0 |
 
-**Font stacks** (from `brand/tokens/primitives/typography.json`):
+**Font stacks** (from `packages/design-tokens/src/primitives/typography.json`):
 - Sans: `Inter, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif`
 - Mono: `JetBrains Mono, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace`
 
@@ -297,9 +297,9 @@ Derived from existing `brand/tokens/primitives/typography.json`. Inter for UI/ma
 
 ### Field 11: Spatial Rules
 
-Derived from existing `brand/tokens/primitives/spacing.json`. 4px/8px grid system.
+Derived from existing `packages/design-tokens/src/primitives/spacing.json`. 4px/8px grid system.
 
-**Scale** (from `brand/tokens/primitives/spacing.json`):
+**Scale** (from `packages/design-tokens/src/primitives/spacing.json`):
 
 ```
 4 / 6 / 8 / 12 / 16 / 20 / 24 / 32 / 40 / 48 / 64 / 80 / 96
@@ -355,7 +355,7 @@ All spacing values must come from this scale. No arbitrary values (37px, 55px, 1
 
 **Touch targets**: Minimum 44px for all interactive elements on mobile.
 
-**Border radii** (from `brand/tokens/primitives/radii.json`):
+**Border radii** (from `packages/design-tokens/src/primitives/radii.json`):
 
 | Context | Radius | Token |
 |---------|--------|-------|
@@ -365,7 +365,7 @@ All spacing values must come from this scale. No arbitrary values (37px, 55px, 1
 | Marketing cards | 8px | `radius.lg` |
 | Pills, avatars | 9999px | `radius.full` |
 
-**Motion** (from `brand/tokens/primitives/motion.json`):
+**Motion** (from `packages/design-tokens/src/primitives/motion.json`):
 
 | Context | Duration | Easing |
 |---------|----------|--------|
@@ -428,4 +428,4 @@ Per the validation skill's edge case guidance for pre-launch products:
 | Voice (F5-7) aligns with ICP (F2)? | PASS | Candid/Capable/Deliberate matches technical developer who values straight talk and working demos over marketing fluff. Anti-vibes guard against alienating newcomers (Elitist) or being dismissive (Harsh). |
 | Visual system (F9-11) matches voice archetype? | PASS | Technical Founder archetype → tight tracking, dark mode, minimal radii (2-6px), mechanical motion easing, monospace presence. All confirmed in token system. |
 | Banned vocabulary absent from all fields? | PASS | No banned words appear in any Brand Packet field. |
-| Color tokens reference actual brand tokens? | PASS | All 6 tokens trace directly to `brand/tokens/primitives/colors.json` and `brand/tokens/semantic/colors.dark.json`. |
+| Color tokens reference actual brand tokens? | PASS | All 6 tokens trace directly to `packages/design-tokens/src/primitives/colors.json` and `packages/design-tokens/src/semantic/colors.dark.json`. |

@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json.schemastore.org/design-tokens",
+  "border-width": {
+    "$type": "dimension",
+    "$description": "CSS border widths for panels, inputs, and separators",
+    "none": {
+      "$value": "0",
+      "$description": "No border"
+    },
+    "thin": {
+      "$value": "1px",
+      "$description": "Default hairline border"
+    },
+    "medium": {
+      "$value": "2px",
+      "$description": "Emphasized border, focus rings"
+    },
+    "thick": {
+      "$value": "4px",
+      "$description": "Heavy accent border, status bars"
+    }
+  },
+  "stroke-width": {
+    "$type": "number",
+    "$description": "SVG stroke widths (unitless) for icons and diagrams",
+    "thin": {
+      "$value": 1,
+      "$description": "Light icon stroke"
+    },
+    "medium": {
+      "$value": 1.5,
+      "$description": "Default icon stroke"
+    },
+    "thick": {
+      "$value": 2,
+      "$description": "Bold icon stroke"
+    }
+  }
+}

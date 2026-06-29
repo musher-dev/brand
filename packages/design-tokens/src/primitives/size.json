@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json.schemastore.org/design-tokens",
+  "size": {
+    "$type": "dimension",
+    "$description": "Fixed component dimensions - icon sizes and control heights",
+    "icon": {
+      "xs": { "$value": "12px", "$description": "Inline/dense icons" },
+      "sm": { "$value": "16px", "$description": "Default UI icons" },
+      "md": { "$value": "20px", "$description": "Buttons, inputs" },
+      "lg": { "$value": "24px", "$description": "Section headers, emphasis" },
+      "xl": { "$value": "32px", "$description": "Feature/empty-state icons" }
+    },
+    "control": {
+      "sm": { "$value": "28px", "$description": "Compact control height (sm buttons/inputs)" },
+      "md": { "$value": "32px", "$description": "Default control height" },
+      "lg": { "$value": "40px", "$description": "Large control height" }
+    }
+  }
+}

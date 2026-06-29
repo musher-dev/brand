@@ -1,4 +1,4 @@
-# Musher Brand Taskfile
+# Musher Design System Taskfile
 # Usage: task [task-name]
 # List tasks: task --list
 
@@ -6,66 +6,50 @@ version: '3'
 
 includes:
   tokens:
-    taskfile: tokens/Taskfile.yml
-    dir: tokens
+    taskfile: packages/design-tokens/Taskfile.yml
+    dir: packages/design-tokens
+  assets:
+    taskfile: packages/brand-assets/Taskfile.yml
+    dir: packages/brand-assets
 
 tasks:
-  # ===========================================================================
-  # Setup
-  # ===========================================================================
-
   setup:
-    desc: Install all dependencies
+    desc: Install the workspace (single root bun.lock)
     cmds:
-      - task: setup:tools
-      - task: tokens:setup
-
-  setup:tools:
-    desc: Install asset pipeline tools (svgo, sharp-cli)
-    cmds:
-      - npm install
-    status:
-      - test -d node_modules/svgo
-      - test -d node_modules/sharp-cli
-
-  # ===========================================================================
-  # Build
-  # ===========================================================================
+      - bun install
 
   build:
-    desc: Build design tokens (CSS variables + Tailwind v4 theme)
+    desc: Build all packages
     cmds:
-      - task: tokens:build
+      - bun run --filter '*' build
 
-  # ===========================================================================
-  # Asset Pipeline
-  # ===========================================================================
+  ui:dev:
+    desc: Build tokens then run the svelte-ui Storybook (dev)
+    cmds:
+      - bun run dev:ui
 
+  ui:storybook:
+    desc: Build tokens then build the svelte-ui Storybook (static)
+    cmds:
+      - bun run storybook:build
+
+  # --- Asset pipeline (delegated to brand-assets) ---
   optimize:
-    desc: Optimize SVGs and PNGs in src/
+    desc: Optimize SVGs and PNGs in brand-assets/src/
     cmds:
-      - bash scripts/optimize.sh
+      - task: assets:optimize
 
   export:
     desc: Export optimized assets from src/ to dist/
     cmds:
-      - bash scripts/export.sh
-
-  # ===========================================================================
-  # Validation
-  # ===========================================================================
+      - task: assets:export
 
   validate:
-    desc: Validate naming conventions and expected files in dist/
+    desc: Validate brand asset naming conventions
     cmds:
-      - bash scripts/validate.sh
-
-  # ===========================================================================
-  # Utilities
-  # ===========================================================================
+      - task: assets:validate
 
   clean:
     desc: Clean all build output
     cmds:
-      - task: tokens:clean
-      - echo "Clean complete!"
+      - bun run --filter '*' clean

@@ -1,0 +1,20 @@
+{
+  "overrides": [
+    {
+      "files": ["**/*.svelte"],
+      "customSyntax": "postcss-html"
+    }
+  ],
+  "rules": {
+    "color-no-hex": true,
+    "unit-disallowed-list": [
+      ["px"],
+      {
+        "ignoreProperties": {
+          "px": ["/^border/", "outline", "outline-width", "/-width$/"]
+        },
+        "message": "Use a design token (var(--spacing-*) / var(--radius-*) / var(--font-size-*)) instead of a hardcoded px value"
+      }
+    ]
+  }
+}

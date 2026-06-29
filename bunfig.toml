@@ -1,0 +1,7 @@
+# Bun configuration for the Musher design-system monorepo.
+#
+# @musher-dev/* packages are published to GitHub Packages (private). Inside this
+# workspace they resolve locally, so auth is only needed when publishing or when
+# a non-workspace consumer (e.g. the platform repo) installs them.
+[install.scopes]
+"@musher-dev" = { token = "$NODE_AUTH_TOKEN", url = "https://npm.pkg.github.com/" }

@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json.schemastore.org/design-tokens",
+  "z-index": {
+    "$type": "number",
+    "$description": "Stacking order scale for layered UI. Use these instead of magic numbers so overlays compose predictably.",
+    "base": {
+      "$value": 0,
+      "$description": "Default document flow"
+    },
+    "raised": {
+      "$value": 10,
+      "$description": "Slightly raised elements (sticky table headers within a container)"
+    },
+    "dropdown": {
+      "$value": 1000,
+      "$description": "Dropdown menus, selects, autocompletes"
+    },
+    "sticky": {
+      "$value": 1100,
+      "$description": "Sticky page chrome (top bars)"
+    },
+    "drawer": {
+      "$value": 1200,
+      "$description": "Side drawers / sheets"
+    },
+    "overlay": {
+      "$value": 1300,
+      "$description": "Backdrop scrims behind modal surfaces"
+    },
+    "modal": {
+      "$value": 1400,
+      "$description": "Modal dialog surfaces"
+    },
+    "popover": {
+      "$value": 1500,
+      "$description": "Popovers anchored above modals"
+    },
+    "toast": {
+      "$value": 1600,
+      "$description": "Toast / notification stack"
+    },
+    "tooltip": {
+      "$value": 1700,
+      "$description": "Tooltips - always on top"
+    }
+  }
+}
