@@ -1,6 +1,6 @@
 {
   "name": "@musher-dev/svelte-ui",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Musher shared Svelte component library, themed by @musher-dev/design-tokens",
   "type": "module",
   "license": "MIT",
