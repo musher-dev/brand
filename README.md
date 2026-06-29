@@ -1,110 +1,59 @@
-# Musher Brand
+# Musher Brand & Design System
 
-Brand assets and design tokens for the [Musher](https://musher.dev) platform.
+The design-system monorepo for the [Musher](https://musher.dev) platform: design tokens, a shared Svelte component library, and brand assets. Consumed by the apps in [`musher-dev/platform`](https://github.com/musher-dev/platform) via GitHub Packages.
 
-## Quick Start
+## Packages
 
-The devcontainer provides all tools automatically. Outside the devcontainer, ensure you have [Task](https://taskfile.dev), Node.js 22+, and [Bun](https://bun.sh) installed.
+| Package | Name | Description |
+|---------|------|-------------|
+| [`packages/design-tokens`](packages/design-tokens) | `@musher-dev/design-tokens` | Single source of truth for visual design — DTCG tokens built into CSS variables, Tailwind v4 `@theme`, typed TS, and JSON, per surface (console / marketing / backstage) × mode (dark / light). |
+| [`packages/svelte-ui`](packages/svelte-ui) | `@musher-dev/svelte-ui` | Shared Svelte 5 component library, themed entirely by design-token CSS variables. |
+| [`packages/brand-assets`](packages/brand-assets) | `@musher-dev/brand-assets` | Logos, icons, illustrations, social, and background assets + the optimize/export pipeline (private). |
 
-```bash
-task setup && task build
-```
+## Quick start
 
-## Directory Overview
-
-```
-brand/
-├── tokens/        Design token system (@musher-dev/design-tokens)
-│   ├── primitives/    Tier 1: raw values (colors, typography, spacing, etc.)
-│   ├── semantic/      Tier 2: dark.json + light.json
-│   ├── transforms/    oklch.js color conversion
-│   └── dist/          Generated CSS + Tailwind output (gitignored)
-│
-├── src/           Source/editable master assets
-│   ├── logo/          Astronaut mark, wordmark, lockup SVGs
-│   │   ├── mark/          Astronaut head icon (4 color schemes)
-│   │   ├── lockup/        Icon + wordmark combinations
-│   │   │   ├── horizontal/    Primary: icon left, wordmark right
-│   │   │   └── stacked/       Icon above wordmark
-│   │   ├── wordmark/      "Musher" text (outlined + editable variants)
-│   │   └── hub/           Musher Hub (igloo) sub-product branding
-│   │       ├── mark/          Igloo icon (5 color schemes + PNGs)
-│   │       ├── lockup/        Hub icon + "Musher Hub" wordmark
-│   │       │   ├── horizontal/    Horizontal + stacked-text variants
-│   │       │   └── stacked/       Icon above wordmark
-│   │       └── wordmark/      "Musher Hub" text-only
-│   ├── illustration/  Brand illustrations
-│   │   ├── scene/         Musher/sled/robots artwork
-│   │   └── masters/       Design source files
-│   ├── icon/          Favicon, PWA, iOS, Android sources
-│   │   └── hub/           Musher Hub favicon bundle
-│   │       └── favicon/       ico, svg, apple-touch, pwa, manifest
-│   ├── social/        Avatars, banners, OG templates
-│   │   ├── discord/       Server icon, banner, avatar
-│   │   └── github/        Organization social preview
-│   ├── background/    Hero, pattern, gradient sources
-│   └── fonts/         Inter, Inter Display, JetBrains Mono
-│
-├── dist/          Optimized production exports (committed)
-│   ├── logo/          Outlined SVGs + rasterized PNGs
-│   │   └── hub/           Hub igloo logo exports
-│   │       ├── svg/           Hub mark, lockup, wordmark SVGs
-│   │       └── png/           Hub mark rasters (256–1024)
-│   ├── illustration/  Scene illustration exports
-│   ├── icon/          Full favicon/PWA/mobile icon sets
-│   │   └── hub/           Hub-specific icon exports
-│   │       └── favicon/       Hub favicon bundle
-│   ├── social/        Platform-specific social assets
-│   │   ├── discord/       Discord server icon, banner, avatar
-│   │   └── github/        GitHub organization social preview
-│   └── background/    Production backgrounds
-│
-├── docs/          Brand documentation
-│   ├── Brand_Guidelines.md   Comprehensive brand reference
-│   └── social-links.json     Official profile links (Schema.org JSON-LD)
-│
-├── scripts/       Automation (optimize, export, validate)
-└── .devcontainer/ Dev environment for brand asset work
-```
-
-## Naming Convention
-
-Pattern: `musher-{asset}-{variant}-{color}-{size}.{ext}`
-
-Examples:
-- `musher-logo-lockup-horizontal-dark.svg`
-- `musher-logo-mark-dark-512.png`
-- `musher-icon-pwa-maskable-512.png`
-- `musher-social-og-default-1200x630.png`
-- `musher-social-banner-x-dark-1500x500.png`
-
-## Design Tokens
-
-The token system lives in `tokens/` and is published as [`@musher-dev/design-tokens`](tokens/README.md).
+The devcontainer provides everything. Otherwise install [Bun](https://bun.sh), Node.js 22+, and [Task](https://taskfile.dev).
 
 ```bash
-# Build tokens
-task build
+bun install                  # install the whole workspace (single root bun.lock)
+bun run --filter '*' build   # build every package
+task build                   # equivalent via Task
 
-# Output
-tokens/dist/css/variables.css            # CSS custom properties (dark)
-tokens/dist/css/variables.light.css      # CSS custom properties (light)
-tokens/dist/tailwind/theme.css           # Tailwind v4 @theme (dark)
-tokens/dist/tailwind/theme.light.css     # Tailwind v4 @theme (light)
+bun run dev:ui               # build tokens, then run the svelte-ui Storybook
 ```
 
-See [tokens/README.md](tokens/README.md) for architecture, color system, and usage.
-
-## Scripts
+## Common commands
 
 | Command | Description |
 |---------|-------------|
-| `task setup` | Install all dependencies (tokens + asset pipeline tools) |
-| `task build` | Build design tokens |
-| `task optimize` | Optimize SVGs and PNGs in `src/` |
-| `task export` | Export optimized assets from `src/` to `dist/` |
-| `task validate` | Validate naming conventions in `dist/` |
-| `task clean` | Remove build artifacts |
+| `bun run --filter '*' build` | Build all packages |
+| `bun run --filter '*' check` | Token symmetry + `svelte-check` + asset validation |
+| `bun run --filter '*' lint` | Stylelint (blocks hardcoded hex/px in components) |
+| `bun run --filter '*' publint` | Validate package exports |
+| `bun run dev:ui` | Storybook dev server for `svelte-ui` |
+| `bun run storybook:build` | Static Storybook build |
+| `task optimize` / `task export` / `task validate` | Brand-asset pipeline (delegates to `brand-assets`) |
+
+## Architecture
+
+- **Bun workspace** (`packages/*`), single root `bun.lock`. No app code lives here — apps consume the published packages.
+- **Three token tiers**: primitives → semantic (theming) → component. Colors authored in oklch; CSS/Tailwind emit native oklch, JSON/TS also carry computed hex. See [`packages/design-tokens/README.md`](packages/design-tokens/README.md).
+- **Components** carry structure/behavior/a11y and are styled only through token CSS variables (Stylelint-enforced) — portable to any consumer regardless of its Tailwind setup. See [`packages/svelte-ui/README.md`](packages/svelte-ui/README.md).
+
+## Publishing & consumption
+
+Packages publish to **GitHub Packages** (`@musher-dev` scope) via [release-please](https://github.com/googleapis/release-please) (one release PR per package; see `config/release/`). Consuming repos need an `.npmrc`:
+
+```ini
+@musher-dev:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}
+```
+
+**Adopting the packages in the platform apps?** See the migration guide: [`docs/consuming-packages.md`](docs/consuming-packages.md).
+
+## Contributing
+
+See [`CONTRIBUTING.md`](CONTRIBUTING.md). Token or brand changes are requested via GitHub issues on this repo; the platform apps treat this repo as the source of truth.
 
 ## License
 

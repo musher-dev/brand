@@ -18,9 +18,11 @@ These two documents are complementary:
 - **Brand Packet** answers: *Who are we talking to? What do we say? How do we say it? What do we never say? What trust signals do we have? What visual tokens do we use?*
 - **Brand Guidelines** answers: *What do our logos look like? Where are the asset files? What color combinations work? What are the spacing rules for logos?*
 
-The Brand Packet governs **strategy and copy**. The Brand Guidelines govern **visual assets and usage rules**. Both reference the same design tokens in `tokens/`.
+The Brand Packet governs **strategy and copy**. The Brand Guidelines govern **visual assets and usage rules**. Both reference the same design tokens in `packages/design-tokens/`.
 
 ## What Lives Elsewhere
 
-- **Design tokens** (`tokens/`) — Visual design system (W3C DTCG format, Oklch colors)
-- **Visual assets** (`src/`, `dist/`) — Logos, icons, social media assets
+- **Design tokens** (`packages/design-tokens/`) — Visual design system (W3C DTCG format, Oklch colors)
+- **Visual assets** (`packages/brand-assets/src/`, `packages/brand-assets/dist/`) — Logos, icons, social media assets
+- **Components** (`packages/svelte-ui/`) — Shared Svelte component library
+- **Adopting the packages** ([consuming-packages.md](consuming-packages.md)) — Migration guide for the platform apps
