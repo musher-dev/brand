@@ -6,6 +6,7 @@ packages/design-tokens/dist/
 
 # Svelte UI build output + Storybook static build
 packages/svelte-ui/dist/
+.svelte-kit/
 storybook-static/
 
 # Note: packages/brand-assets/dist/ IS committed (exported brand assets)
