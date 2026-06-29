@@ -128,7 +128,17 @@ const TAILWIND_NAMESPACE = {
 	radius: 'radius',
 	shadow: 'shadow',
 	duration: 'transition-duration',
+	delay: 'transition-delay',
 	easing: 'transition-timing-function',
+	// Native Tailwind v4 theme namespaces (generate utilities)
+	breakpoint: 'breakpoint',
+	container: 'container',
+	// Var-only categories (no Tailwind utility, consumed via var(--…))
+	opacity: 'opacity',
+	'border-width': 'border-width',
+	'stroke-width': 'stroke-width',
+	'z-index': 'z-index',
+	size: 'size',
 };
 const TAILWIND_FONT_SUB = { weight: 'font-weight', lineHeight: 'leading', letterSpacing: 'tracking' };
 const TEXT_SIZE_NAMES = ['label', 'data', 'body', 'body-large', 'body-reading', 'heading-sm', 'heading', 'title', 'display', 'display-lg'];

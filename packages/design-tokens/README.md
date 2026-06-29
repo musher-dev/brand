@@ -58,7 +58,12 @@ packages/design-tokens/
 │   │   ├── spacing.json
 │   │   ├── radii.json
 │   │   ├── shadows.json
-│   │   └── motion.json
+│   │   ├── motion.json    # duration, easing, stagger delays
+│   │   ├── opacity.json   # disabled/muted/hover/active/scrim
+│   │   ├── borders.json   # border-width + stroke-width
+│   │   ├── z-index.json   # dropdown…modal…toast…tooltip layering
+│   │   ├── layout.json    # container + breakpoint scales
+│   │   └── size.json      # icon + control sizes
 │   ├── semantic/          # Tier 2: Purpose-driven aliases (console baseline)
 │   │   ├── colors.dark.json   # DEFAULT - dark mode semantics
 │   │   └── colors.light.json  # OVERRIDE - light mode semantics

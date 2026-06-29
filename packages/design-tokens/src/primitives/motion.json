@@ -47,5 +47,12 @@
       "$value": [0.4, 0, 0.2, 1],
       "$description": "Smooth - elements moving"
     }
+  },
+  "delay": {
+    "$type": "duration",
+    "$description": "Staggered animation delays for sequenced entrances",
+    "stagger-1": { "$value": "100ms", "$description": "First staggered item" },
+    "stagger-2": { "$value": "200ms", "$description": "Second staggered item" },
+    "stagger-3": { "$value": "300ms", "$description": "Third staggered item" }
   }
 }
